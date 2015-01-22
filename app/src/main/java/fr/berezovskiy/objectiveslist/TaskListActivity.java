@@ -2,9 +2,14 @@ package fr.berezovskiy.objectiveslist;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -14,6 +19,9 @@ import fr.berezovskiy.objectiveslist.models.TaskAdapter;
 
 
 public class TaskListActivity extends Activity {
+
+    private static final String TAG = "TaskListActivity";
+    public static final String TASK_SELECTED = "TASK_SELECTED";
 
     private ListView taskListView = null;
 
@@ -25,6 +33,16 @@ public class TaskListActivity extends Activity {
         taskListView = (ListView) findViewById(R.id.task_listView);
         taskListView.setAdapter(new TaskAdapter(this, getTasks()));
 
+        taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Task task = (Task) parent.getItemAtPosition(position);
+                Intent intent = new Intent(TaskListActivity.this, TaskActivity.class);
+                intent.putExtra(TASK_SELECTED, task);
+                Log.d(TAG, task.toString());
+                startActivity(intent);
+            }
+        });
 
     }
 
