@@ -1,44 +1,24 @@
 package fr.berezovskiy.objectiveslist;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 
-public class MainActivity extends ActionBarActivity {
-
-    private static final String TAG = "MainActivity";
-
-    private Button goTasks = null;
+public class TaskActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        goTasks = (Button) findViewById(R.id.go_tasks);
-
-        goTasks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "MainActivity.click");
-                Intent intent = new Intent(MainActivity.this, TaskListActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        setContentView(R.layout.activity_task);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_task, menu);
         return true;
     }
 
