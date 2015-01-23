@@ -22,6 +22,19 @@
             android:enabled="true"
             android:exported="true" >
         </receiver>
+
+        <activity
+            android:name=".TaskActivity"
+            android:label="@string/title_activity_task" >
+        </activity>
+        <activity
+            android:name=".TaskListActivity"
+            android:label="@string/title_activity_task_list" >
+        </activity>
+        <activity
+            android:name=".AddTaskActivity"
+            android:label="@string/title_activity_add_task" >
+        </activity>
     </application>
 
 </manifest>
