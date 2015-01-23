@@ -3,15 +3,41 @@ package fr.berezovskiy.objectiveslist.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Task implements Parcelable {
-    private String title;
+import java.util.Date;
 
-    public Task(String title) {
+public class Task implements Parcelable {
+
+    private int id;
+    private String title;
+    private String description;
+    private String state;
+    private Date dateLimit;
+    private Date createdAt;
+    private Date updatedAt;
+
+    public Task() {
+        this(null, null, null, null);
+    }
+    public Task(String title, String description, String state, Date dateLimit) {
+        this.id = 0;
         this.title = title;
+        this.description = description;
+        this.state = state;
+        this.dateLimit = dateLimit;
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
     }
 
     private Task(Parcel in) {
         this.setTitle(in.readString());
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -22,11 +48,44 @@ public class Task implements Parcelable {
         this.title = title;
     }
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                "title='" + title + '\'' +
-                '}';
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public Date getDateLimit() {
+        return dateLimit;
+    }
+
+    public void setDateLimit(Date dateLimit) {
+        this.dateLimit = dateLimit;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override

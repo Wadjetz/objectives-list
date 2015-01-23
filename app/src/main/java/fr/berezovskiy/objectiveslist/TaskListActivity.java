@@ -13,9 +13,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import fr.berezovskiy.objectiveslist.models.Task;
 import fr.berezovskiy.objectiveslist.models.TaskAdapter;
+import fr.berezovskiy.objectiveslist.models.TaskDAO;
 
 
 public class TaskListActivity extends Activity {
@@ -25,10 +27,15 @@ public class TaskListActivity extends Activity {
 
     private ListView taskListView = null;
 
+    private TaskDAO tasksDao = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
+
+        tasksDao = new TaskDAO(this);
+        tasksDao.open();
 
         taskListView = (ListView) findViewById(R.id.task_listView);
         taskListView.setAdapter(new TaskAdapter(this, getTasks()));
@@ -51,17 +58,7 @@ public class TaskListActivity extends Activity {
      * @return
      */
     private ArrayList<Task> getTasks() {
-        // TODO create a really database
-        ArrayList<Task> taskList = new ArrayList<>();
-        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-                "Android", "iPhone", "WindowsMobile" };
-        for (int i = 0; i < values.length; ++i) {
-            taskList.add(new Task(values[i]));
-        }
-        return taskList;
+        return (ArrayList<Task>) tasksDao.getAllTasks();
     }
 
 
