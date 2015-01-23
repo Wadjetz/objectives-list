@@ -5,19 +5,20 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
+import fr.berezovskiy.objectiveslist.helpers.SQLiteHelper;
+
 public class Task implements Parcelable {
 
-    private int id;
-    private String title;
-    private String description;
-    private String state;
-    private Date dateLimit;
-    private Date createdAt;
-    private Date updatedAt;
+    private int id = 0;
+    private String title = "";
+    private String description = "";
+    private String state = "";
+    private Date dateLimit = null;
+    private Date createdAt = null;
+    private Date updatedAt = null;
 
-    public Task() {
-        this(null, null, null, null);
-    }
+    public Task() {}
+
     public Task(String title, String description, String state, Date dateLimit) {
         this.id = 0;
         this.title = title;
@@ -27,6 +28,18 @@ public class Task implements Parcelable {
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }
+
+    public Task(String title, String description, String state, String dateLimit) {
+        this.id = 0;
+        this.title = title;
+        this.description = description;
+        this.state = state;
+        this.dateLimit = SQLiteHelper.getDateTime(dateLimit);
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
+    }
+
+
 
     private Task(Parcel in) {
         this.setTitle(in.readString());
@@ -109,4 +122,17 @@ public class Task implements Parcelable {
             return new Task[0];
         }
     };
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", state='" + state + '\'' +
+                ", dateLimit=" + dateLimit +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }

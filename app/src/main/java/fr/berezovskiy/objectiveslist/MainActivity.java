@@ -15,6 +15,7 @@ public class MainActivity extends ActionBarActivity {
     private static final String TAG = "MainActivity";
 
     private Button goTasks = null;
+    private Button goAddTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +23,21 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         goTasks = (Button) findViewById(R.id.go_tasks);
+        goAddTask = (Button) findViewById(R.id.add_task_btn);
+
+        goAddTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "MainActivity.goAddTask");
+                Intent intent = new Intent(MainActivity.this, AddTaskActivity.class);
+                startActivity(intent);
+            }
+        });
 
         goTasks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "MainActivity.click");
+                Log.d(TAG, "MainActivity.goTasks");
                 Intent intent = new Intent(MainActivity.this, TaskListActivity.class);
                 startActivity(intent);
             }

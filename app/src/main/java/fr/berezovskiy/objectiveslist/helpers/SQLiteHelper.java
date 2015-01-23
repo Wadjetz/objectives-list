@@ -29,7 +29,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 TaskDAO.STATE + " TEXT NOT NULL, " +
                 TaskDAO.DATE_LIMIT + " DATETIME NOT NULL, " +
                 TaskDAO.CREATED_AT + " DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, " +
-                TaskDAO.UPDATED_AT + " DATETIME NOT NULL " +
+                TaskDAO.UPDATED_AT + " DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP" +
             " );";
 
     public SQLiteHelper(Context context) {

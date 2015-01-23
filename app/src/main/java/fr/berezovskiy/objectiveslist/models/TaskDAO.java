@@ -49,7 +49,6 @@ public class TaskDAO {
 
     public Task create(Task task) {
         ContentValues values = new ContentValues();
-        values.put(ID, task.getId());
         values.put(TITLE, task.getTitle());
         values.put(DESCRIPTION, task.getDescription());
         values.put(STATE, task.getState());
