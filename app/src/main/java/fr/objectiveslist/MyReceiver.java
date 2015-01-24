@@ -1,4 +1,4 @@
-package fr.berezovskiy.objectiveslist;
+package fr.objectiveslist;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

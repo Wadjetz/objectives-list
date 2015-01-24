@@ -1,4 +1,4 @@
-package fr.berezovskiy.objectiveslist;
+package fr.objectiveslist;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

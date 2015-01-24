@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import fr.berezovskiy.objectiveslist.R;
+import fr.objectiveslist.R;
 
 public class TaskAdapter extends BaseAdapter {
 
