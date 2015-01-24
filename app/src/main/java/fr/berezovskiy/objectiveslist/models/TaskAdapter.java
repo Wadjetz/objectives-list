@@ -1,6 +1,7 @@
 package fr.berezovskiy.objectiveslist.models;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import fr.berezovskiy.objectiveslist.R;
 
 public class TaskAdapter extends BaseAdapter {
 
+    private static final String TAG = TaskAdapter.class.getName();
     private List<Task> taskList;
     private Context context;
     private LayoutInflater inflater;
@@ -49,7 +51,11 @@ public class TaskAdapter extends BaseAdapter {
         }
 
         TextView taskTitleTextView = (TextView) layoutItem.findViewById(R.id.task_title);
-        taskTitleTextView.setText(this.taskList.get(position).getTitle());
+        TextView taskDesctiptionTextView = (TextView) layoutItem.findViewById(R.id.task_description);
+        Task task = this.taskList.get(position);
+        Log.d(TAG, task.toString());
+        taskTitleTextView.setText(task.getTitle());
+        taskDesctiptionTextView.setText(task.getDescription().trim());
 
         return layoutItem;
     }
