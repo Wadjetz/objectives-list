@@ -1,4 +1,4 @@
-package fr.berezovskiy.objectiveslist.helpers;
+package fr.objectiveslist.helpers;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import fr.berezovskiy.objectiveslist.models.TaskDAO;
+import fr.objectiveslist.models.TaskDAO;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
 

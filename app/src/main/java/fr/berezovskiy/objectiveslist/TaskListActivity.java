@@ -12,9 +12,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import fr.berezovskiy.objectiveslist.models.Task;
-import fr.berezovskiy.objectiveslist.models.TaskAdapter;
-import fr.berezovskiy.objectiveslist.models.TaskDAO;
+import fr.objectiveslist.models.Task;
+import fr.objectiveslist.models.TaskAdapter;
+import fr.objectiveslist.models.TaskDAO;
 
 public class TaskListActivity extends ActionBarActivity {
 

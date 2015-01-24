@@ -1,4 +1,4 @@
-package fr.berezovskiy.objectiveslist.helpers;
+package fr.objectiveslist.helpers;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

@@ -15,11 +15,11 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-import fr.berezovskiy.objectiveslist.helpers.DatePickerFragment;
-import fr.berezovskiy.objectiveslist.helpers.SQLiteHelper;
-import fr.berezovskiy.objectiveslist.helpers.TimePickerFragment;
-import fr.berezovskiy.objectiveslist.models.Task;
-import fr.berezovskiy.objectiveslist.models.TaskDAO;
+import fr.objectiveslist.helpers.DatePickerFragment;
+import fr.objectiveslist.helpers.SQLiteHelper;
+import fr.objectiveslist.helpers.TimePickerFragment;
+import fr.objectiveslist.models.Task;
+import fr.objectiveslist.models.TaskDAO;
 
 
 public class AddTaskActivity extends ActionBarActivity {

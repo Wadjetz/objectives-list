@@ -1,4 +1,4 @@
-package fr.berezovskiy.objectiveslist.models;
+package fr.objectiveslist.models;
 
 import android.content.Context;
 import android.util.Log;

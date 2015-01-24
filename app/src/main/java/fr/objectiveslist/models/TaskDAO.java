@@ -1,4 +1,4 @@
-package fr.berezovskiy.objectiveslist.models;
+package fr.objectiveslist.models;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import fr.berezovskiy.objectiveslist.helpers.SQLiteHelper;
+import fr.objectiveslist.helpers.SQLiteHelper;
 
 public class TaskDAO {
 

@@ -5,15 +5,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import fr.berezovskiy.objectiveslist.helpers.SQLiteHelper;
-import fr.berezovskiy.objectiveslist.models.Task;
-import fr.berezovskiy.objectiveslist.models.TaskDAO;
+import fr.objectiveslist.helpers.SQLiteHelper;
+import fr.objectiveslist.models.Task;
+import fr.objectiveslist.models.TaskDAO;
 
 
 public class TaskActivity extends ActionBarActivity {

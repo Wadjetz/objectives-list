@@ -1,4 +1,4 @@
-package fr.berezovskiy.objectiveslist.models;
+package fr.objectiveslist.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.util.Calendar;
 import java.util.Date;
 
-import fr.berezovskiy.objectiveslist.helpers.SQLiteHelper;
+import fr.objectiveslist.helpers.SQLiteHelper;
 
 public class Task implements Parcelable {
 
