@@ -1,10 +1,8 @@
 package fr.berezovskiy.objectiveslist;
 
-import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,19 +11,20 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import fr.berezovskiy.objectiveslist.models.Task;
 import fr.berezovskiy.objectiveslist.models.TaskAdapter;
 import fr.berezovskiy.objectiveslist.models.TaskDAO;
 
 
-public class TaskListActivity extends Activity {
+public class TaskListActivity extends ActionBarActivity {
 
     private static final String TAG = "TaskListActivity";
     public static final String TASK_SELECTED = "TASK_SELECTED";
 
     private ListView taskListView = null;
+
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     private TaskDAO tasksDao = null;
 
@@ -37,13 +36,18 @@ public class TaskListActivity extends Activity {
         tasksDao = new TaskDAO(this);
         tasksDao.open();
 
+        tasks = (ArrayList<Task>) tasksDao.getAllTasks();
+
+        Log.d(TAG, tasks.toString());
+
         taskListView = (ListView) findViewById(R.id.task_listView);
-        taskListView.setAdapter(new TaskAdapter(this, getTasks()));
+        taskListView.setAdapter(new TaskAdapter(this, tasks));
 
         taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Task task = (Task) parent.getItemAtPosition(position);
+                Log.d(TAG, task.toString());
                 Intent intent = new Intent(TaskListActivity.this, TaskActivity.class);
                 intent.putExtra(TASK_SELECTED, task);
                 Log.d(TAG, task.toString());
@@ -52,15 +56,6 @@ public class TaskListActivity extends Activity {
         });
 
     }
-
-    /**
-     * Gets Tasks from database
-     * @return
-     */
-    private ArrayList<Task> getTasks() {
-        return (ArrayList<Task>) tasksDao.getAllTasks();
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,17 +66,15 @@ public class TaskListActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                return true;
+            case R.id.action_new:
+                startActivity(new Intent(this, AddTaskActivity.class));
+                return true;
+            default:
+                return true;
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
 }

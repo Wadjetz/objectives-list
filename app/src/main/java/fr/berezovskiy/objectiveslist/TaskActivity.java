@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import fr.berezovskiy.objectiveslist.helpers.SQLiteHelper;
 import fr.berezovskiy.objectiveslist.models.Task;
 
 
@@ -16,6 +17,8 @@ public class TaskActivity extends ActionBarActivity {
     private static final String TAG = "TaskActivity";
 
     private TextView taskTitle = null;
+    private TextView taskDescription = null;
+    private TextView taskDateLimit = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,12 @@ public class TaskActivity extends ActionBarActivity {
         Log.d(TAG, task.toString());
 
         taskTitle = (TextView) findViewById(R.id.task_title);
+        taskDescription = (TextView) findViewById(R.id.task_description);
+        taskDateLimit = (TextView) findViewById(R.id.task_datetime_limit);
+
         taskTitle.setText(task.getTitle());
+        taskDescription.setText(task.getDescription());
+        taskDateLimit.setText(SQLiteHelper.dateTimeFormat.format(task.getDateLimit()));
     }
 
 

@@ -3,6 +3,7 @@ package fr.berezovskiy.objectiveslist.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import fr.berezovskiy.objectiveslist.helpers.SQLiteHelper;
@@ -25,8 +26,6 @@ public class Task implements Parcelable {
         this.description = description;
         this.state = state;
         this.dateLimit = dateLimit;
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
     }
 
     public Task(String title, String description, String state, String dateLimit) {
@@ -35,14 +34,63 @@ public class Task implements Parcelable {
         this.description = description;
         this.state = state;
         this.dateLimit = SQLiteHelper.getDateTime(dateLimit);
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
     }
 
-
-
     private Task(Parcel in) {
+        this.setId(in.readInt());
         this.setTitle(in.readString());
+        this.setDescription(in.readString());
+        this.setState(in.readString());
+        this.setDateLimit(dateFromTimestamp(in.readLong()));
+        this.setCreatedAt(dateFromTimestamp(in.readLong()));
+        this.setUpdatedAt(dateFromTimestamp(in.readLong()));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.getId());
+        dest.writeString(this.getTitle());
+        dest.writeString(this.getDescription());
+        dest.writeString(this.getState());
+        dest.writeLong(this.getDateLimit().getTime());
+        dest.writeLong(this.getCreatedAt().getTime());
+        dest.writeLong(this.getUpdatedAt().getTime());
+    }
+
+    public static final Creator<Task> CREATOR = new Creator<Task>() {
+        @Override
+        public Task createFromParcel(Parcel source) {
+            return new Task(source);
+        }
+
+        @Override
+        public Task[] newArray(int size) {
+            return new Task[0];
+        }
+    };
+
+    public Date dateFromTimestamp(long timestamp) {
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(timestamp);
+        return c.getTime();
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", state='" + state + '\'' +
+                ", dateLimit=" + dateLimit +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 
     public int getId() {
@@ -99,40 +147,5 @@ public class Task implements Parcelable {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.getTitle());
-    }
-
-    public static final Creator<Task> CREATOR = new Creator<Task>() {
-        @Override
-        public Task createFromParcel(Parcel source) {
-            return new Task(source);
-        }
-
-        @Override
-        public Task[] newArray(int size) {
-            return new Task[0];
-        }
-    };
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", state='" + state + '\'' +
-                ", dateLimit=" + dateLimit +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
     }
 }

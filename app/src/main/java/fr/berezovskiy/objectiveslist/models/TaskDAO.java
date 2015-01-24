@@ -53,8 +53,6 @@ public class TaskDAO {
         values.put(DESCRIPTION, task.getDescription());
         values.put(STATE, task.getState());
         values.put(DATE_LIMIT, SQLiteHelper.getDateTime(task.getDateLimit()));
-        values.put(CREATED_AT, SQLiteHelper.getDateTime(task.getCreatedAt()));
-        values.put(UPDATED_AT, SQLiteHelper.getDateTime(task.getUpdatedAt()));
 
         long insertId = db.insert(TABLE_NAME, null, values);
         Cursor cursor = db.query(TABLE_NAME, allColumns, ID + " = " + insertId, null,
