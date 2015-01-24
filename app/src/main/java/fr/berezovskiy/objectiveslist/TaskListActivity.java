@@ -1,10 +1,8 @@
 package fr.berezovskiy.objectiveslist;
 
-import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,14 +11,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import fr.berezovskiy.objectiveslist.models.Task;
 import fr.berezovskiy.objectiveslist.models.TaskAdapter;
 import fr.berezovskiy.objectiveslist.models.TaskDAO;
 
 
-public class TaskListActivity extends Activity {
+public class TaskListActivity extends ActionBarActivity {
 
     private static final String TAG = "TaskListActivity";
     public static final String TASK_SELECTED = "TASK_SELECTED";

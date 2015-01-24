@@ -13,5 +13,7 @@
     <string name="date_limit">Date Limit</string>
     <string name="save">Save</string>
     <string name="add">Add</string>
+    <string name="set_date">Set Date</string>
+    <string name="set_time">Set Time</string>
 
 </resources>

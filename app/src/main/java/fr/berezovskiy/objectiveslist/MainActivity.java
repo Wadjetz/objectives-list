@@ -3,48 +3,28 @@ package fr.berezovskiy.objectiveslist;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    private static final String TAG = "MainActivity";
-
-    private Button goTasks = null;
-    private Button goAddTask = null;
+    private static final String TAG = MainActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        goTasks = (Button) findViewById(R.id.go_tasks);
-        goAddTask = (Button) findViewById(R.id.add_task_btn);
-
-        goAddTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "MainActivity.goAddTask");
-                Intent intent = new Intent(MainActivity.this, AddTaskActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        goTasks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "MainActivity.goTasks");
-                Intent intent = new Intent(MainActivity.this, TaskListActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
+    public void goAddTask(View v) {
+        startActivity(new Intent(MainActivity.this, AddTaskActivity.class));
+    }
+
+    public void goTasks(View v) {
+        startActivity(new Intent(MainActivity.this, TaskListActivity.class));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

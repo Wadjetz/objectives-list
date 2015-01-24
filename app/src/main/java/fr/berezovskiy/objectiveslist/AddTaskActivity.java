@@ -1,7 +1,8 @@
 package fr.berezovskiy.objectiveslist;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,9 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
-import java.util.Date;
+import java.util.Calendar;
 
+import fr.berezovskiy.objectiveslist.helpers.DatePickerFragment;
+import fr.berezovskiy.objectiveslist.helpers.SQLiteHelper;
+import fr.berezovskiy.objectiveslist.helpers.TimePickerFragment;
 import fr.berezovskiy.objectiveslist.models.Task;
 import fr.berezovskiy.objectiveslist.models.TaskDAO;
 
@@ -20,13 +26,14 @@ public class AddTaskActivity extends ActionBarActivity {
 
     private static final String TAG = AddTaskActivity.class.getName();
 
-    private Button saveButton = null;
+    private Calendar calendar = Calendar.getInstance();
 
     private TaskDAO tasksDao = null;
 
     private EditText title = null;
     private EditText description = null;
-    private DatePicker dateLimit = null;
+    private Button dateLimit = null;
+    private Button timeLimit = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,21 +42,45 @@ public class AddTaskActivity extends ActionBarActivity {
 
         title = (EditText) findViewById(R.id.task_title);
         description = (EditText) findViewById(R.id.task_description);
-        dateLimit = (DatePicker) findViewById(R.id.task_date_limit);
-
-        saveButton = (Button) findViewById(R.id.save);
+        dateLimit = (Button) findViewById(R.id.task_date_limit);
+        timeLimit = (Button) findViewById(R.id.task_time_limit);
 
         tasksDao = new TaskDAO(this);
         tasksDao.open();
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
+
+
+    }
+
+    public void saveTask(View v) {
+        Task task = new Task(title.getText().toString(), description.getText().toString(), "created",
+                calendar.getTime());
+        tasksDao.create(task);
+
+        Toast.makeText(this, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this, MainActivity.class));
+    }
+
+    public void showDatePickerDialog(View v) {
+        DatePickerFragment date = new DatePickerFragment() {
             @Override
-            public void onClick(View v) {
-                Task task = new Task(title.getText().toString(), description.getText().toString(), "created", new Date());
-                tasksDao.create(task);
-                Log.d(TAG, "Save = " + task.toString());
+            public void onDateSet(DatePicker view, int y, int m, int d) {
+                calendar.set(y, m, d);
+                dateLimit.setText(SQLiteHelper.dateFormat.format(calendar.getTime()));
             }
-        });
+        };
+        date.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public void showTimePickerDialog(View v) {
+        TimePickerFragment time = new TimePickerFragment() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                calendar.set(hourOfDay, minute);
+                timeLimit.setText(SQLiteHelper.timeFormat.format(calendar.getTime()));
+            }
+        };
+        time.show(getSupportFragmentManager(), "timePicker");
     }
 
 

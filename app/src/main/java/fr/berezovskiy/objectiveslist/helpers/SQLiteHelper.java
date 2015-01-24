@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -16,7 +17,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     private static final String TAG = SQLiteHelper.class.getName();
 
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    public static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy MM dd", Locale.getDefault());
+    public static SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
     private static final String DATABASE_NAME = "objectives_list.db";
     private static final int DATABASE_VERSION = 1;
@@ -50,13 +53,19 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     public static String getDateTime(Date date) {
-        return dateFormat.format(date);
+        return dateTimeFormat.format(date);
+    }
+
+    public static Date getDateTime(int yyyy, int MM, int dd, int HH, int mm) {
+        final Calendar c = Calendar.getInstance();
+        c.set(yyyy, MM, dd, HH, mm);
+        return c.getTime();
     }
 
     public static Date getDateTime(String dateTime) {
         Date date = new Date();
         try {
-            date = dateFormat.parse(dateTime);
+            date = dateTimeFormat.parse(dateTime);
         } catch (ParseException e) {
             e.printStackTrace();
         }
