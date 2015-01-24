@@ -16,7 +16,6 @@ import fr.berezovskiy.objectiveslist.models.Task;
 import fr.berezovskiy.objectiveslist.models.TaskAdapter;
 import fr.berezovskiy.objectiveslist.models.TaskDAO;
 
-
 public class TaskListActivity extends ActionBarActivity {
 
     private static final String TAG = "TaskListActivity";
@@ -55,6 +54,18 @@ public class TaskListActivity extends ActionBarActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tasksDao.open();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        tasksDao.close();
     }
 
     @Override

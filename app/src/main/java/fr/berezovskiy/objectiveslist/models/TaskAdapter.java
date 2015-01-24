@@ -15,7 +15,7 @@ import fr.berezovskiy.objectiveslist.R;
 
 public class TaskAdapter extends BaseAdapter {
 
-    private static final String TAG = TaskAdapter.class.getName();
+    private static final String TAG = "TaskAdapter";
     private List<Task> taskList;
     private Context context;
     private LayoutInflater inflater;

@@ -5,13 +5,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import fr.berezovskiy.objectiveslist.helpers.SQLiteHelper;
 
 public class TaskDAO {
+
+    private static final String TAG = "TaskDAO";
 
     public static final String TABLE_NAME = "tasks";
     public static final String ID = "id";
@@ -48,6 +52,7 @@ public class TaskDAO {
     }
 
     public Task create(Task task) {
+        Log.d(TAG, "Create = " + task.toString());
         ContentValues values = new ContentValues();
         values.put(TITLE, task.getTitle());
         values.put(DESCRIPTION, task.getDescription());
@@ -62,6 +67,35 @@ public class TaskDAO {
         Task newTask = cursorToTask(cursor);
         cursor.close();
         return newTask;
+    }
+
+    public int update(Task task) {
+        Log.d(TAG, "Update = " + task.toString());
+        ContentValues values = new ContentValues();
+        values.put(TITLE, task.getTitle());
+        values.put(DESCRIPTION, task.getDescription());
+        values.put(STATE, task.getState());
+        values.put(DATE_LIMIT, SQLiteHelper.getDateTime(task.getDateLimit()));
+        values.put(UPDATED_AT, SQLiteHelper.getDateTime(Calendar.getInstance().getTime()));
+
+        return db.update(TABLE_NAME, values, ID + " = " + task.getId(), null);
+    }
+
+    public int taskDone(Task task) {
+        ContentValues values = new ContentValues();
+        values.put(STATE, Task.DONE);
+        return db.update(TABLE_NAME, values, ID + " = " + task.getId(), null);
+    }
+
+    public int taskUndone(Task task) {
+        ContentValues values = new ContentValues();
+        values.put(STATE, Task.UNDONE);
+        return db.update(TABLE_NAME, values, ID + " = " + task.getId(), null);
+    }
+
+    public int delete(Task task) {
+        Log.d(TAG, "Delete = " + task.toString());
+        return db.delete(TABLE_NAME, ID + " = " + task.getId(), null);
     }
 
     private Task cursorToTask(Cursor cursor) {

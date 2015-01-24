@@ -1,8 +1,8 @@
 package fr.berezovskiy.objectiveslist;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -22,10 +21,9 @@ import fr.berezovskiy.objectiveslist.models.Task;
 import fr.berezovskiy.objectiveslist.models.TaskDAO;
 
 
-public class AddTaskActivity extends ActionBarActivity {
+public class EditTaskActivity extends ActionBarActivity {
 
-    private static final String TAG = "AddTaskActivity";
-
+    private static final String TAG = "EditTaskActivity";
     private Calendar calendar = Calendar.getInstance();
 
     private TaskDAO tasksDao = null;
@@ -38,38 +36,22 @@ public class AddTaskActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_task);
+        setContentView(R.layout.activity_edit_task);
 
         title = (EditText) findViewById(R.id.task_title);
         description = (EditText) findViewById(R.id.task_description);
         dateLimit = (Button) findViewById(R.id.task_date_limit);
         timeLimit = (Button) findViewById(R.id.task_time_limit);
 
+        Intent intent = getIntent();
+        Task task = intent.getExtras().getParcelable(TaskActivity.TASK_EDITED);
+        Log.d(TAG, task.toString());
+
+        title.setText(task.getTitle());
+        description.setText(task.getDescription());
+
         tasksDao = new TaskDAO(this);
         tasksDao.open();
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        tasksDao.open();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        tasksDao.close();
-    }
-
-    public void saveTask(View v) {
-        Task task = new Task(title.getText().toString(), description.getText().toString(), Task.CREATED,
-                calendar.getTime());
-        Log.d(TAG, task.toString());
-        tasksDao.create(task);
-        Toast.makeText(this, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this, TaskListActivity.class));
-        finish();
     }
 
     public void showDatePickerDialog(View v) {
@@ -99,7 +81,7 @@ public class AddTaskActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_task, menu);
+        getMenuInflater().inflate(R.menu.menu_edit_task, menu);
         return true;
     }
 

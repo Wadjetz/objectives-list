@@ -15,7 +15,7 @@ import fr.berezovskiy.objectiveslist.models.TaskDAO;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
 
-    private static final String TAG = SQLiteHelper.class.getName();
+    private static final String TAG = "SQLiteHelper";
 
     public static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy MM dd", Locale.getDefault());
