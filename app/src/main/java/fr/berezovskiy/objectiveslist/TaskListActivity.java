@@ -24,6 +24,8 @@ public class TaskListActivity extends ActionBarActivity {
 
     private ListView taskListView = null;
 
+    private ArrayList<Task> tasks = new ArrayList<>();
+
     private TaskDAO tasksDao = null;
 
     @Override
@@ -34,13 +36,18 @@ public class TaskListActivity extends ActionBarActivity {
         tasksDao = new TaskDAO(this);
         tasksDao.open();
 
+        tasks = (ArrayList<Task>) tasksDao.getAllTasks();
+
+        Log.d(TAG, tasks.toString());
+
         taskListView = (ListView) findViewById(R.id.task_listView);
-        taskListView.setAdapter(new TaskAdapter(this, getTasks()));
+        taskListView.setAdapter(new TaskAdapter(this, tasks));
 
         taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Task task = (Task) parent.getItemAtPosition(position);
+                Log.d(TAG, task.toString());
                 Intent intent = new Intent(TaskListActivity.this, TaskActivity.class);
                 intent.putExtra(TASK_SELECTED, task);
                 Log.d(TAG, task.toString());
@@ -49,15 +56,6 @@ public class TaskListActivity extends ActionBarActivity {
         });
 
     }
-
-    /**
-     * Gets Tasks from database
-     * @return
-     */
-    private ArrayList<Task> getTasks() {
-        return (ArrayList<Task>) tasksDao.getAllTasks();
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
