@@ -55,10 +55,10 @@ public class AddTaskActivity extends ActionBarActivity {
     public void saveTask(View v) {
         Task task = new Task(title.getText().toString(), description.getText().toString(), "created",
                 calendar.getTime());
+        Log.d(TAG, task.toString());
         tasksDao.create(task);
-
         Toast.makeText(this, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, TaskListActivity.class));
     }
 
     public void showDatePickerDialog(View v) {
@@ -76,7 +76,8 @@ public class AddTaskActivity extends ActionBarActivity {
         TimePickerFragment time = new TimePickerFragment() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                calendar.set(hourOfDay, minute);
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
                 timeLimit.setText(SQLiteHelper.timeFormat.format(calendar.getTime()));
             }
         };
