@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -27,6 +28,7 @@ public class EditTaskActivity extends ActionBarActivity {
     private Calendar calendar = Calendar.getInstance();
 
     private TaskDAO tasksDao = null;
+    private Task task = null;
 
     private EditText title = null;
     private EditText description = null;
@@ -43,15 +45,39 @@ public class EditTaskActivity extends ActionBarActivity {
         dateLimit = (Button) findViewById(R.id.task_date_limit);
         timeLimit = (Button) findViewById(R.id.task_time_limit);
 
+
+
         Intent intent = getIntent();
-        Task task = intent.getExtras().getParcelable(TaskActivity.TASK_EDITED);
+        task = intent.getExtras().getParcelable(TaskActivity.TASK_EDITED);
         Log.d(TAG, task.toString());
+
+        calendar.setTimeInMillis(task.getDateLimit().getTime());
+
+        dateLimit.setText(SQLiteHelper.dateFormat.format(calendar.getTime()));
+        timeLimit.setText(SQLiteHelper.timeFormat.format(calendar.getTime()));
 
         title.setText(task.getTitle());
         description.setText(task.getDescription());
 
         tasksDao = new TaskDAO(this);
         tasksDao.open();
+    }
+
+    public void updateTask(View v) {
+
+        task.setTitle(title.getText().toString());
+        task.setDescription(description.getText().toString());
+        task.setDateLimit(calendar.getTime());
+
+        Log.d(TAG, task.toString());
+        int res = tasksDao.update(task);
+        if (res > 0) {
+            Toast.makeText(this, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, TaskListActivity.class));
+            finish();
+        } else {
+            Toast.makeText(this, "Task Update Error", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void showDatePickerDialog(View v) {

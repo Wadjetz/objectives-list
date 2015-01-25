@@ -61,7 +61,7 @@
     <Button
         android:id="@+id/save_task"
         android:text="@string/save"
-        android:onClick="saveTask"
+        android:onClick="updateTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
