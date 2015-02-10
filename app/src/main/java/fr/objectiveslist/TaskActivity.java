@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import fr.objectiveslist.helpers.Dates;
 import fr.objectiveslist.helpers.SQLiteHelper;
 import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskDAO;
@@ -49,7 +50,7 @@ public class TaskActivity extends ActionBarActivity {
 
         taskTitle.setText(task.getTitle());
         taskDescription.setText(task.getDescription());
-        taskDateLimit.setText(SQLiteHelper.dateTimeFormat.format(task.getDateLimit()));
+        taskDateLimit.setText(Dates.prettyDateTimeFormat.format(task.getDateLimit()));
         taskStatus.setText(task.getState());
 
     }
