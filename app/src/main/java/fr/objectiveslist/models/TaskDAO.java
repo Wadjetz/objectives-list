@@ -114,6 +114,27 @@ public class TaskDAO {
         return task;
     }
 
+
+    /*
+
+        Methode pour faire le trie
+     */
+
+    public List<Task> getTrieTask(String trie){
+        List<Task> tasks = new ArrayList<>();
+
+        Cursor cursor = db.query(TABLE_NAME, allColumns,"WHERE " + STATE + " = "+ trie,null,null,null,null);
+
+        cursor.moveToFirst();
+        while(! cursor.isAfterLast()){
+            Task task = cursorToTask(cursor);
+            tasks.add(task);
+            cursor.moveToNext();
+        }
+        return tasks;
+    }
+
+
     public List<Task> getAllTasks() {
         List<Task> tasks = new ArrayList<>();
         Cursor cursor = db.query(TABLE_NAME, allColumns, null, null, null, null, null);
