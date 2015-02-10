@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class TaskActivity extends ActionBarActivity {
     private TextView taskTitle = null;
     private TextView taskDescription = null;
     private TextView taskDateLimit = null;
+    private TextView taskStatus = null;
 
     private TaskDAO tasksDAO = null;
 
@@ -42,11 +44,23 @@ public class TaskActivity extends ActionBarActivity {
         taskTitle = (TextView) findViewById(R.id.task_title);
         taskDescription = (TextView) findViewById(R.id.task_description);
         taskDateLimit = (TextView) findViewById(R.id.task_datetime_limit);
+        taskStatus = (TextView) findViewById(R.id.task_status);
+
 
         taskTitle.setText(task.getTitle());
         taskDescription.setText(task.getDescription());
         taskDateLimit.setText(SQLiteHelper.dateTimeFormat.format(task.getDateLimit()));
+        taskStatus.setText(task.getState());
+
     }
+
+    public void doneTask(View v) {
+        tasksDAO.taskDone(task);
+        taskStatus.setText(Task.DONE);
+        startActivity(new Intent(this, TaskListActivity.class));
+        finish();
+    }
+
 
     @Override
     protected void onResume() {

@@ -81,6 +81,10 @@ public class TaskDAO {
         return db.update(TABLE_NAME, values, ID + " = " + task.getId(), null);
     }
 
+    public void selectUndone() {
+        //db
+    }
+
     public int taskDone(Task task) {
         ContentValues values = new ContentValues();
         values.put(STATE, Task.DONE);
