@@ -58,6 +58,17 @@
 
     </LinearLayout>
 
+    <TextView
+        android:text="@string/etat_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etat" />
+
     <Button
         android:id="@+id/save_task"
         android:text="@string/save"

@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -34,6 +36,8 @@ public class AddTaskActivity extends ActionBarActivity {
     private EditText description = null;
     private Button dateLimit = null;
     private Button timeLimit = null;
+    private Spinner spinner = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,12 @@ public class AddTaskActivity extends ActionBarActivity {
         description = (EditText) findViewById(R.id.task_description);
         dateLimit = (Button) findViewById(R.id.task_date_limit);
         timeLimit = (Button) findViewById(R.id.task_time_limit);
+        spinner = (Spinner) findViewById(R.id.etat);
+
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.etat_value, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner.setAdapter(adapter);
 
         tasksDao = new TaskDAO(this);
         tasksDao.open();
@@ -63,7 +73,7 @@ public class AddTaskActivity extends ActionBarActivity {
     }
 
     public void saveTask(View v) {
-        Task task = new Task(title.getText().toString(), description.getText().toString(), Task.CREATED,
+        Task task = new Task(title.getText().toString(), description.getText().toString(), spinner.getSelectedItem().toString(),
                 calendar.getTime());
         Log.d(TAG, task.toString());
         tasksDao.create(task);
