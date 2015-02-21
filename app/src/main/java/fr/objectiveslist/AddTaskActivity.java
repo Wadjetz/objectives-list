@@ -63,13 +63,17 @@ public class AddTaskActivity extends ActionBarActivity {
     }
 
     public void saveTask(View v) {
-        Task task = new Task(title.getText().toString(), description.getText().toString(), Task.CREATED,
-                calendar.getTime());
-        Log.d(TAG, task.toString());
-        tasksDao.create(task);
-        Toast.makeText(this, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this, TaskListActivity.class));
-        finish();
+        if(title.getText().toString().trim().length()>0 && title.getText().toString().trim().length()<=30) {
+            Task task = new Task(title.getText().toString(), description.getText().toString(), Task.CREATED,
+                    calendar.getTime());
+            Log.d(TAG, task.toString());
+            tasksDao.create(task);
+            Toast.makeText(this, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, TaskListActivity.class));
+            finish();
+        } else {
+            Toast.makeText(this, "You need to enter a title ! (Max 30 characters)", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void showDatePickerDialog(View v) {
