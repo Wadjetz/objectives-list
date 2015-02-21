@@ -8,9 +8,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskAdapter;
@@ -27,6 +31,10 @@ public class TaskListActivity extends ActionBarActivity {
 
     private TaskDAO tasksDao = null;
 
+    private Spinner spinner = null;
+
+    private Button trie = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +44,17 @@ public class TaskListActivity extends ActionBarActivity {
         tasksDao.open();
 
         tasks = (ArrayList<Task>) tasksDao.getAllTasks();
-
+        spinner = (Spinner) findViewById(R.id.etat);
+        trie = (Button) findViewById(R.id.trie);
         Log.d(TAG, tasks.toString());
 
         taskListView = (ListView) findViewById(R.id.task_listView);
         taskListView.setAdapter(new TaskAdapter(this, tasks));
+
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.etat_trie, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner.setAdapter(adapter);
 
         taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -88,4 +102,15 @@ public class TaskListActivity extends ActionBarActivity {
         }
     }
 
+
+    public  void trieList(View v){
+        if(spinner.getSelectedItem().toString().equals("Toutes")){
+            tasks = (ArrayList<Task>) tasksDao.getAllTasks();
+            taskListView.setAdapter(new TaskAdapter(this, tasks));
+        }
+        else {
+            List listTrie = tasksDao.getTrieTask(spinner.getSelectedItem().toString());
+            taskListView.setAdapter(new TaskAdapter(this, listTrie));
+        }
+    }
 }

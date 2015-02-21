@@ -123,7 +123,7 @@ public class TaskDAO {
     public List<Task> getTrieTask(String trie){
         List<Task> tasks = new ArrayList<>();
 
-        Cursor cursor = db.query(TABLE_NAME, allColumns,"WHERE " + STATE + " = "+ trie,null,null,null,null);
+        Cursor cursor = db.query(TABLE_NAME, allColumns, STATE + " = '"+ trie+"'",null,null,null,null);
 
         cursor.moveToFirst();
         while(! cursor.isAfterLast()){
@@ -148,6 +148,8 @@ public class TaskDAO {
         cursor.close();
         return tasks;
     }
+
+
 
 }
 

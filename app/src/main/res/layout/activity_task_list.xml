@@ -4,7 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fr.objectiveslist.TaskListActivity">
+    tools:context="fr.objectiveslist.TaskListActivity"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Spinner
+                android:layout_width="177dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/etat" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_trie"
+                android:id="@+id/trie"
+                android:layout_column="20"
+                android:onClick="trieList"/>
+
+        </TableRow>
+
+    </TableLayout>
 
     <ListView
         android:layout_width="match_parent"
