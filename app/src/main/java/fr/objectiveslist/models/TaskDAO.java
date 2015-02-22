@@ -26,10 +26,10 @@ public class TaskDAO {
     public static final String CREATED_AT = "created_at";
     public static final String UPDATED_AT = "updated_at";
 
-    private SQLiteDatabase db;
+    public SQLiteDatabase db;
     private SQLiteHelper dbHelper;
 
-    private String[] allColumns = {
+    public String[] allColumns = {
             ID,
             TITLE,
             DESCRIPTION,

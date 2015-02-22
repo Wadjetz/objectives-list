@@ -1,6 +1,9 @@
 package fr.objectiveslist;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -9,8 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskAdapter;
@@ -54,6 +60,8 @@ public class TaskListActivity extends ActionBarActivity {
             }
         });
 
+        timeAlert();
+
     }
 
     @Override
@@ -86,6 +94,31 @@ public class TaskListActivity extends ActionBarActivity {
             default:
                 return true;
         }
+    }
+
+    public void timeAlert()
+    {
+        Calendar c = Calendar.getInstance();
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+        String formattedDate = df.format(c.getTime());
+
+        Cursor cursor = tasksDao.db.query(tasksDao.TABLE_NAME, tasksDao.allColumns, "date_limit < '"+formattedDate+"' and ", null, null, null, null);
+        cursor.moveToFirst();
+        while (! cursor.isAfterLast()) {
+            Log.d(TAG, cursor.getString(4));
+            cursor.moveToNext();
+        }
+
+        if(cursor.getCount()>0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Tasks are passed !!!");
+            builder.setPositiveButton("Ok", null);
+            builder.create().show();
+        }
+
+        cursor.close();
+
     }
 
 }
