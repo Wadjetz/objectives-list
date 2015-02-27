@@ -44,6 +44,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".TaskListActivity" />
         </activity>
+        <activity
+            android:name=".Trie"
+            android:label="@string/title_activity_trie" >
+        </activity>
     </application>
 
 </manifest>

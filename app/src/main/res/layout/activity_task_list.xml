@@ -15,17 +15,12 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <Spinner
-                android:layout_width="177dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/etat" />
-
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/button_trie"
                 android:id="@+id/trie"
-                android:layout_column="20"
+                android:layout_column="30"
                 android:onClick="trieList"/>
 
         </TableRow>

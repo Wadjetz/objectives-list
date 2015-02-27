@@ -20,16 +20,20 @@
     <string name="title_activity_edit_task">EditTaskActivity</string>
     <string name="done">Done</string>
     <string name="etat_task">Etat</string>
-    <string name="button_trie">Trier</string>
+    <string name="button_trie">Sort</string>
+
     <string-array name="etat_value">
-        <item>En cours</item>
-        <item>Annulée</item>
-        <item>Terminer</item>
+        <item>In progress</item>
+        <item>Cancel</item>
+        <item>Finish</item>
     </string-array>
     <string-array name="etat_trie">
-        <item>Toutes</item>
-        <item>En cours</item>
-        <item>Annulée</item>
-        <item>Terminer</item>
+        <item>All</item>
+        <item>In progress</item>
+        <item>Cancel</item>
+        <item>Finish</item>
     </string-array>
+
+    <string name="title_activity_trie">Sort</string>
+
 </resources>

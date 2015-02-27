@@ -1,7 +1,9 @@
 package fr.objectiveslist;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -11,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,6 @@ public class TaskListActivity extends ActionBarActivity {
 
     private TaskDAO tasksDao = null;
 
-    private Spinner spinner = null;
 
     private Button trie = null;
 
@@ -44,7 +44,6 @@ public class TaskListActivity extends ActionBarActivity {
         tasksDao.open();
 
         tasks = (ArrayList<Task>) tasksDao.getAllTasks();
-        spinner = (Spinner) findViewById(R.id.etat);
         trie = (Button) findViewById(R.id.trie);
         Log.d(TAG, tasks.toString());
 
@@ -52,9 +51,6 @@ public class TaskListActivity extends ActionBarActivity {
         taskListView.setAdapter(new TaskAdapter(this, tasks));
 
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.etat_trie, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        spinner.setAdapter(adapter);
 
         taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,6 +70,7 @@ public class TaskListActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
         tasksDao.open();
+
     }
 
     @Override
@@ -102,15 +99,18 @@ public class TaskListActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(resultCode == RESULT_OK){
+            tasks = data.getParcelableArrayListExtra("ResultTrie");
 
-    public  void trieList(View v){
-        if(spinner.getSelectedItem().toString().equals("Toutes")){
-            tasks = (ArrayList<Task>) tasksDao.getAllTasks();
             taskListView.setAdapter(new TaskAdapter(this, tasks));
         }
-        else {
-            List listTrie = tasksDao.getTrieTask(spinner.getSelectedItem().toString());
-            taskListView.setAdapter(new TaskAdapter(this, listTrie));
-        }
+    }
+
+    public  void trieList(View v){
+        Intent trie = new Intent(this, Trie.class);
+        startActivityForResult(trie, 1);
+
     }
 }

@@ -9,6 +9,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import fr.objectiveslist.helpers.SQLiteHelper;
@@ -120,10 +121,87 @@ public class TaskDAO {
         Methode pour faire le trie
      */
 
+    //tout les champs
+    public List<Task> getTrieTask(String trie, Date date, String nom){
+        List<Task> tasks = new ArrayList<>();
+
+        Cursor cursor = db.query(TABLE_NAME, allColumns, STATE + " = '"+ trie+"' AND date("+ DATE_LIMIT+") = date('"+SQLiteHelper.getDateTime(date) +"')" +" AND "+ TITLE +" = '"+ nom +"'" ,null,null,null,null);
+
+        cursor.moveToFirst();
+        while(! cursor.isAfterLast()){
+            Task task = cursorToTask(cursor);
+            tasks.add(task);
+            cursor.moveToNext();
+        }
+        return tasks;
+    }
+
+    //uniquement la date
+    public List<Task> getTrieTask( Date date){
+        List<Task> tasks = new ArrayList<>();
+
+        Cursor cursor = db.query(TABLE_NAME, allColumns," date("+ DATE_LIMIT+") = date('"+SQLiteHelper.getDateTime(date) +"')",null,null,null,null);
+
+        cursor.moveToFirst();
+        while(! cursor.isAfterLast()){
+            Task task = cursorToTask(cursor);
+            tasks.add(task);
+            cursor.moveToNext();
+        }
+        return tasks;
+    }
+    //date + un champs text type = 0 pour l'état et type=1 pour le nom
+    public List<Task> getTrieTask( Date date, String val, int type){
+        List<Task> tasks = new ArrayList<>();
+        Cursor cursor;
+        if(type==0) {
+            cursor = db.query(TABLE_NAME, allColumns, " date(" + DATE_LIMIT + ") = date('" + SQLiteHelper.getDateTime(date) + "') AND " + STATE + "='" + val + "'", null, null, null, null);
+        }
+        else{
+            cursor = db.query(TABLE_NAME, allColumns, " date(" + DATE_LIMIT + ") = date('" + SQLiteHelper.getDateTime(date) + "') AND " + TITLE + "='" + val + "'", null, null, null, null);
+        }
+        cursor.moveToFirst();
+        while(! cursor.isAfterLast()){
+            Task task = cursorToTask(cursor);
+            tasks.add(task);
+            cursor.moveToNext();
+        }
+        return tasks;
+    }
+
+
+    //uniquement l'état
     public List<Task> getTrieTask(String trie){
         List<Task> tasks = new ArrayList<>();
 
-        Cursor cursor = db.query(TABLE_NAME, allColumns, STATE + " = '"+ trie+"'",null,null,null,null);
+        Cursor cursor = db.query(TABLE_NAME, allColumns, STATE + " = '"+ trie+"'" ,null,null,null,null);
+
+        cursor.moveToFirst();
+        while(! cursor.isAfterLast()){
+            Task task = cursorToTask(cursor);
+            tasks.add(task);
+            cursor.moveToNext();
+        }
+        return tasks;
+    }
+
+
+    //l'état + le nom
+    public List<Task> getTrieTask(String trie, String nom){
+        List<Task> tasks = new ArrayList<>();
+        Cursor cursor;
+        //si l'etat + le nom sont différent de ""
+        if( !trie.equals("") && !nom.equals("")) {
+            cursor = db.query(TABLE_NAME, allColumns, STATE + " = '" + trie + "' AND " + TITLE + " = '" + nom + "'", null, null, null, null);
+        }
+        //que l'état
+        else if(!trie.equals("") && nom.equals("")){
+            cursor = db.query(TABLE_NAME, allColumns, STATE + " = '" + trie + "'", null, null, null, null);
+        }
+        //que le nom
+        else{
+            cursor = db.query(TABLE_NAME, allColumns, TITLE + " = '" + nom + "'", null, null, null, null);
+        }
 
         cursor.moveToFirst();
         while(! cursor.isAfterLast()){
