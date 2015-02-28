@@ -1,18 +1,17 @@
 package fr.objectiveslist;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskAdapter;
 import fr.objectiveslist.models.TaskDAO;
 
-public class TaskListActivity extends ActionBarActivity {
+public class TaskListActivity extends Activity {
 
     private static final String TAG = "TaskListActivity";
     public static final String TASK_SELECTED = "TASK_SELECTED";
@@ -33,6 +32,9 @@ public class TaskListActivity extends ActionBarActivity {
 
     private TaskDAO tasksDao = null;
 
+
+    private Button trie = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +44,13 @@ public class TaskListActivity extends ActionBarActivity {
         tasksDao.open();
 
         tasks = (ArrayList<Task>) tasksDao.getAllTasks();
-
+        trie = (Button) findViewById(R.id.trie);
         Log.d(TAG, tasks.toString());
 
         taskListView = (ListView) findViewById(R.id.task_listView);
         taskListView.setAdapter(new TaskAdapter(this, tasks));
+
+
 
         taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -64,10 +68,13 @@ public class TaskListActivity extends ActionBarActivity {
 
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
         tasksDao.open();
+
     }
 
     @Override
@@ -81,6 +88,10 @@ public class TaskListActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_task_list, menu);
         return true;
+    }
+
+    public void newTaskAction(View v) {
+        startActivity(new Intent(this, AddTaskActivity.class));
     }
 
     @Override
@@ -121,4 +132,18 @@ public class TaskListActivity extends ActionBarActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(resultCode == RESULT_OK){
+            tasks = data.getParcelableArrayListExtra("ResultTrie");
+
+            taskListView.setAdapter(new TaskAdapter(this, tasks));
+        }
+    }
+
+    public  void trieList(View v){
+        Intent trie = new Intent(this, Trie.class);
+        startActivityForResult(trie, 1);
+
+    }
 }

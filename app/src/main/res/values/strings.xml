@@ -19,6 +19,25 @@
     <string name="edit_task">Edit Task</string>
     <string name="title_activity_edit_task">EditTaskActivity</string>
     <string name="done">Done</string>
+    <string name="etat_task">Etat</string>
+    <string name="button_trie">Sort</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_task">Delete</string>
+    <string name="back">Back</string>
+    <string name="create_new_task">Create New Task</string>
 
+    <string-array name="etat_value">
+        <item>In progress</item>
+        <item>Cancel</item>
+        <item>Finish</item>
+    </string-array>
+    <string-array name="etat_trie">
+        <item>All</item>
+        <item>In progress</item>
+        <item>Cancel</item>
+        <item>Finish</item>
+    </string-array>
+
+    <string name="title_activity_trie">Sort</string>
 
 </resources>

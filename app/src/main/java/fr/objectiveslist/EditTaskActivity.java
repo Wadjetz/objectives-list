@@ -1,28 +1,32 @@
 package fr.objectiveslist;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
 
 import fr.objectiveslist.helpers.DatePickerFragment;
+import fr.objectiveslist.helpers.Dates;
 import fr.objectiveslist.helpers.SQLiteHelper;
 import fr.objectiveslist.helpers.TimePickerFragment;
 import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskDAO;
 
 
-public class EditTaskActivity extends ActionBarActivity {
+public class EditTaskActivity extends FragmentActivity {
 
     private static final String TAG = "EditTaskActivity";
     private Calendar calendar = Calendar.getInstance();
@@ -35,6 +39,8 @@ public class EditTaskActivity extends ActionBarActivity {
     private Button dateLimit = null;
     private Button timeLimit = null;
 
+
+    private Spinner spinner = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +51,13 @@ public class EditTaskActivity extends ActionBarActivity {
         dateLimit = (Button) findViewById(R.id.task_date_limit);
         timeLimit = (Button) findViewById(R.id.task_time_limit);
 
+        spinner = (Spinner) findViewById(R.id.etat);
+
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.etat_value, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner.setAdapter(adapter);
+
 
 
         Intent intent = getIntent();
@@ -53,11 +66,21 @@ public class EditTaskActivity extends ActionBarActivity {
 
         calendar.setTimeInMillis(task.getDateLimit().getTime());
 
-        dateLimit.setText(SQLiteHelper.dateFormat.format(calendar.getTime()));
-        timeLimit.setText(SQLiteHelper.timeFormat.format(calendar.getTime()));
+        dateLimit.setText(Dates.dateFormat.format(calendar.getTime()));
+        timeLimit.setText(Dates.timeFormat.format(calendar.getTime()));
 
         title.setText(task.getTitle());
         description.setText(task.getDescription());
+
+
+        Log.i("spinner", task.getState());
+
+        if(!task.getState().equals(null)){
+            int position = adapter.getPosition(task.getState());
+            spinner.setSelection(position);
+            position = 0;
+        }
+
 
         tasksDao = new TaskDAO(this);
         tasksDao.open();
@@ -83,12 +106,18 @@ public class EditTaskActivity extends ActionBarActivity {
         }
     }
 
+    public void cancelAction(View v) {
+        Intent intent = new Intent(this, TaskActivity.class);
+        intent.putExtra(TaskActivity.TASK_EDITED, task);
+        startActivity(intent);
+    }
+
     public void showDatePickerDialog(View v) {
         DatePickerFragment date = new DatePickerFragment() {
             @Override
             public void onDateSet(DatePicker view, int y, int m, int d) {
                 calendar.set(y, m, d);
-                dateLimit.setText(SQLiteHelper.dateFormat.format(calendar.getTime()));
+                dateLimit.setText(Dates.prettyDateFormat.format(calendar.getTime()));
             }
         };
         date.show(getSupportFragmentManager(), "datePicker");
@@ -100,7 +129,7 @@ public class EditTaskActivity extends ActionBarActivity {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 calendar.set(Calendar.MINUTE, minute);
-                timeLimit.setText(SQLiteHelper.timeFormat.format(calendar.getTime()));
+                timeLimit.setText(Dates.timeFormat.format(calendar.getTime()));
             }
         };
         time.show(getSupportFragmentManager(), "timePicker");

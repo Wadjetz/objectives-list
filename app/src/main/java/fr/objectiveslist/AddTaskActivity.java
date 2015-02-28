@@ -2,27 +2,29 @@ package fr.objectiveslist;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
 
 import fr.objectiveslist.helpers.DatePickerFragment;
-import fr.objectiveslist.helpers.SQLiteHelper;
+import fr.objectiveslist.helpers.Dates;
 import fr.objectiveslist.helpers.TimePickerFragment;
 import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskDAO;
 
 
-public class AddTaskActivity extends ActionBarActivity {
+public class AddTaskActivity extends FragmentActivity {
 
     private static final String TAG = "AddTaskActivity";
 
@@ -34,6 +36,8 @@ public class AddTaskActivity extends ActionBarActivity {
     private EditText description = null;
     private Button dateLimit = null;
     private Button timeLimit = null;
+    private Spinner spinner = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,12 @@ public class AddTaskActivity extends ActionBarActivity {
         description = (EditText) findViewById(R.id.task_description);
         dateLimit = (Button) findViewById(R.id.task_date_limit);
         timeLimit = (Button) findViewById(R.id.task_time_limit);
+        spinner = (Spinner) findViewById(R.id.etat);
+
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.etat_value, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner.setAdapter(adapter);
 
         tasksDao = new TaskDAO(this);
         tasksDao.open();
@@ -76,12 +86,16 @@ public class AddTaskActivity extends ActionBarActivity {
         }
     }
 
+    public void cancelAction(View v) {
+        startActivity(new Intent(this, TaskListActivity.class));
+    }
+
     public void showDatePickerDialog(View v) {
         DatePickerFragment date = new DatePickerFragment() {
             @Override
             public void onDateSet(DatePicker view, int y, int m, int d) {
                 calendar.set(y, m, d);
-                dateLimit.setText(SQLiteHelper.dateFormat.format(calendar.getTime()));
+                dateLimit.setText(Dates.dateFormat.format(calendar.getTime()));
             }
         };
         date.show(getSupportFragmentManager(), "datePicker");
@@ -93,7 +107,7 @@ public class AddTaskActivity extends ActionBarActivity {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 calendar.set(Calendar.MINUTE, minute);
-                timeLimit.setText(SQLiteHelper.timeFormat.format(calendar.getTime()));
+                timeLimit.setText(Dates.timeFormat.format(calendar.getTime()));
             }
         };
         time.show(getSupportFragmentManager(), "timePicker");
