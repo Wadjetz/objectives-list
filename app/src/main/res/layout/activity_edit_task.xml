@@ -16,36 +16,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView android:text="@string/edit_task"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/Title1"
+            android:text="@string/edit_task" />
 
-        <TextView android:text="@string/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/BaseItem"
+            android:text="@string/title" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseItem"
             android:id="@+id/task_title"/>
 
         <TextView
-            android:text="@string/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            style="@style/BaseItem"
+            android:text="@string/description" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseItem"
             android:inputType="textMultiLine"
             android:ems="10"
             android:id="@+id/task_description" />
 
         <TextView
-            android:text="@string/date_limit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            style="@style/BaseItem"
+            android:text="@string/date_limit" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,26 +64,22 @@
         </LinearLayout>
 
         <TextView
+            style="@style/BaseItem"
             android:text="@string/etat_task"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/textView" />
 
         <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseItem"
             android:id="@+id/etat" />
 
         <Button
+            style="@style/BaseItem"
             android:id="@+id/save_task"
             android:text="@string/save"
-            android:onClick="updateTask"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:onClick="updateTask" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseItem"
             android:onClick="cancelAction"
             android:text="@string/cancel"/>
 

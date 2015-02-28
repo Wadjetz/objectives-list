@@ -16,37 +16,33 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView android:text="@string/create_new_task"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/Title1"
+            android:text="@string/create_new_task" />
 
 
-        <TextView android:text="@string/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/BaseItem"
+            android:text="@string/title" />
+
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseItem"
             android:id="@+id/task_title"/>
 
         <TextView
-            android:text="@string/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            style="@style/BaseItem"
+            android:text="@string/description" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseItem"
             android:inputType="textMultiLine"
             android:ems="10"
             android:id="@+id/task_description" />
 
         <TextView
-            android:text="@string/date_limit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            style="@style/BaseItem"
+            android:text="@string/date_limit" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,26 +66,22 @@
         </LinearLayout>
 
         <TextView
+            style="@style/BaseItem"
             android:text="@string/etat_task"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/textView2" />
 
         <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseItem"
             android:id="@+id/etat" />
 
         <Button
+            style="@style/BaseItem"
             android:id="@+id/save_task"
             android:text="@string/save"
-            android:onClick="saveTask"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:onClick="saveTask" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseItem"
             android:onClick="cancelAction"
             android:text="@string/cancel"/>
 

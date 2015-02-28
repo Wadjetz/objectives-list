@@ -19,15 +19,13 @@
         android:orientation="horizontal">
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseItem"
             android:layout_weight="1"
             android:text="@string/new_task"
             android:onClick="newTaskAction" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BaseItem"
             android:text="@string/button_trie"
             android:id="@+id/trie"
             android:layout_weight="1"
