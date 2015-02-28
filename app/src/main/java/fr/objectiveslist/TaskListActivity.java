@@ -114,7 +114,7 @@ public class TaskListActivity extends Activity {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm");
         String formattedDate = df.format(c.getTime());
 
-        Cursor cursor = tasksDao.db.query(tasksDao.TABLE_NAME, tasksDao.allColumns, "date_limit < '"+formattedDate+"' and ", null, null, null, null);
+        Cursor cursor = tasksDao.db.query(tasksDao.TABLE_NAME, tasksDao.allColumns, "date_limit < '"+formattedDate+"' ", null, null, null, null);
         cursor.moveToFirst();
         while (! cursor.isAfterLast()) {
             Log.d(TAG, cursor.getString(4));
