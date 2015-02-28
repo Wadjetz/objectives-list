@@ -2,16 +2,21 @@ package fr.objectiveslist;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskAdapter;
@@ -28,6 +33,9 @@ public class TaskListActivity extends Activity {
 
     private TaskDAO tasksDao = null;
 
+
+    private Button trie = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +45,13 @@ public class TaskListActivity extends Activity {
         tasksDao.open();
 
         tasks = (ArrayList<Task>) tasksDao.getAllTasks();
-
+        trie = (Button) findViewById(R.id.trie);
         Log.d(TAG, tasks.toString());
 
         taskListView = (ListView) findViewById(R.id.task_listView);
         taskListView.setAdapter(new TaskAdapter(this, tasks));
+
+
 
         taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -63,6 +73,7 @@ public class TaskListActivity extends Activity {
     protected void onResume() {
         super.onResume();
         tasksDao.open();
+
     }
 
     @Override
@@ -95,4 +106,18 @@ public class TaskListActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(resultCode == RESULT_OK){
+            tasks = data.getParcelableArrayListExtra("ResultTrie");
+
+            taskListView.setAdapter(new TaskAdapter(this, tasks));
+        }
+    }
+
+    public  void trieList(View v){
+        Intent trie = new Intent(this, Trie.class);
+        startActivityForResult(trie, 1);
+
+    }
 }

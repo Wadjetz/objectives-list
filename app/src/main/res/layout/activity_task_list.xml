@@ -21,8 +21,18 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/new_task"
             android:onClick="newTaskAction" />
-        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_trie"
+            android:id="@+id/trie"
+            android:layout_weight="1"
+            android:onClick="trieList"/>
+    </LinearLayout>
 
 </LinearLayout>
+
