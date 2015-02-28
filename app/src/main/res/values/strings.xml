@@ -21,6 +21,10 @@
     <string name="done">Done</string>
     <string name="etat_task">Etat</string>
     <string name="button_trie">Sort</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_task">Delete</string>
+    <string name="back">Back</string>
+    <string name="create_new_task">Create New Task</string>
 
     <string-array name="etat_value">
         <item>In progress</item>
