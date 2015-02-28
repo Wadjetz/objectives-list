@@ -1,8 +1,9 @@
 package fr.objectiveslist;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +24,7 @@ import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskDAO;
 
 
-public class AddTaskActivity extends ActionBarActivity {
+public class AddTaskActivity extends FragmentActivity {
 
     private static final String TAG = "AddTaskActivity";
 
@@ -71,6 +72,10 @@ public class AddTaskActivity extends ActionBarActivity {
         Toast.makeText(this, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
         startActivity(new Intent(this, TaskListActivity.class));
         finish();
+    }
+
+    public void cancelAction(View v) {
+        startActivity(new Intent(this, TaskListActivity.class));
     }
 
     public void showDatePickerDialog(View v) {

@@ -1,5 +1,6 @@
 package fr.objectiveslist;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +18,7 @@ import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskDAO;
 
 
-public class TaskActivity extends ActionBarActivity {
+public class TaskActivity extends Activity {
 
     private static final String TAG = "TaskActivity";
     public static final String TASK_EDITED = "TASK_EDITED";
@@ -39,6 +40,10 @@ public class TaskActivity extends ActionBarActivity {
         Intent intent = getIntent();
         task = intent.getExtras().getParcelable(TaskListActivity.TASK_SELECTED);
 
+        if (task == null) {
+            task = intent.getExtras().getParcelable(TASK_EDITED);
+        }
+
         tasksDAO = new TaskDAO(this);
         tasksDAO.open();
 
@@ -58,6 +63,37 @@ public class TaskActivity extends ActionBarActivity {
     public void doneTask(View v) {
         tasksDAO.taskDone(task);
         taskStatus.setText(Task.DONE);
+        startActivity(new Intent(this, TaskListActivity.class));
+        finish();
+    }
+
+    public void editTaskAction(View v) {
+        Intent intent = new Intent(this, EditTaskActivity.class);
+        intent.putExtra(TASK_EDITED, task);
+        startActivity(intent);
+        finish();
+    }
+
+    public void deleteTaskAction(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete Task ?");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(TaskActivity.this, "Task Delete", Toast.LENGTH_LONG).show();
+                tasksDAO.delete(task);
+                startActivity(new Intent(TaskActivity.this, TaskListActivity.class));
+                finish();
+            }
+
+        });
+
+        builder.setNegativeButton("Cancel", null);
+        builder.create().show();
+    }
+
+    public void backAction(View v) {
         startActivity(new Intent(this, TaskListActivity.class));
         finish();
     }

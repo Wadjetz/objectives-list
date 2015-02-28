@@ -1,6 +1,7 @@
 package fr.objectiveslist;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +24,7 @@ import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskDAO;
 
 
-public class EditTaskActivity extends ActionBarActivity {
+public class EditTaskActivity extends FragmentActivity {
 
     private static final String TAG = "EditTaskActivity";
     private Calendar calendar = Calendar.getInstance();
@@ -79,6 +80,12 @@ public class EditTaskActivity extends ActionBarActivity {
         } else {
             Toast.makeText(this, "Task Update Error", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void cancelAction(View v) {
+        Intent intent = new Intent(this, TaskActivity.class);
+        intent.putExtra(TaskActivity.TASK_EDITED, task);
+        startActivity(intent);
     }
 
     public void showDatePickerDialog(View v) {

@@ -1,5 +1,6 @@
 package fr.objectiveslist;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -16,7 +17,7 @@ import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskAdapter;
 import fr.objectiveslist.models.TaskDAO;
 
-public class TaskListActivity extends ActionBarActivity {
+public class TaskListActivity extends Activity {
 
     private static final String TAG = "TaskListActivity";
     public static final String TASK_SELECTED = "TASK_SELECTED";
@@ -56,6 +57,8 @@ public class TaskListActivity extends ActionBarActivity {
 
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -73,6 +76,10 @@ public class TaskListActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_task_list, menu);
         return true;
+    }
+
+    public void newTaskAction(View v) {
+        startActivity(new Intent(this, AddTaskActivity.class));
     }
 
     @Override
