@@ -1,6 +1,5 @@
 package fr.objectiveslist;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -20,7 +19,6 @@ import java.util.Calendar;
 
 import fr.objectiveslist.helpers.DatePickerFragment;
 import fr.objectiveslist.helpers.Dates;
-import fr.objectiveslist.helpers.SQLiteHelper;
 import fr.objectiveslist.helpers.TimePickerFragment;
 import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskDAO;
@@ -75,13 +73,17 @@ public class AddTaskActivity extends FragmentActivity {
     }
 
     public void saveTask(View v) {
-        Task task = new Task(title.getText().toString(), description.getText().toString(), spinner.getSelectedItem().toString(),
-                calendar.getTime());
-        Log.d(TAG, task.toString());
-        tasksDao.create(task);
-        Toast.makeText(this, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this, TaskListActivity.class));
-        finish();
+        if(title.getText().toString().trim().length()>0 && title.getText().toString().trim().length()<=30) {
+            Task task = new Task(title.getText().toString(), description.getText().toString(), Task.CREATED,
+                    calendar.getTime());
+            Log.d(TAG, task.toString());
+            tasksDao.create(task);
+            Toast.makeText(this, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, TaskListActivity.class));
+            finish();
+        } else {
+            Toast.makeText(this, "You need to enter a title ! (Max 30 characters)", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void cancelAction(View v) {

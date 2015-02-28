@@ -87,19 +87,22 @@ public class EditTaskActivity extends FragmentActivity {
     }
 
     public void updateTask(View v) {
+        if(title.getText().toString().trim().length()>0 && title.getText().toString().trim().length()<=30) {
+            task.setTitle(title.getText().toString());
+            task.setDescription(description.getText().toString());
+            task.setDateLimit(calendar.getTime());
 
-        task.setTitle(title.getText().toString());
-        task.setDescription(description.getText().toString());
-        task.setDateLimit(calendar.getTime());
-        task.setState(spinner.getSelectedItem().toString());
-        Log.d(TAG, task.toString());
-        int res = tasksDao.update(task);
-        if (res > 0) {
-            Toast.makeText(this, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, TaskListActivity.class));
-            finish();
+            Log.d(TAG, task.toString());
+            int res = tasksDao.update(task);
+            if (res > 0) {
+                Toast.makeText(this, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
+                startActivity(new Intent(this, TaskListActivity.class));
+                finish();
+            } else {
+                Toast.makeText(this, "Task Update Error", Toast.LENGTH_LONG).show();
+            }
         } else {
-            Toast.makeText(this, "Task Update Error", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "You need to enter a title ! (Max 30 characters)", Toast.LENGTH_LONG).show();
         }
     }
 

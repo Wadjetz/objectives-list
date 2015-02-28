@@ -1,10 +1,8 @@
 package fr.objectiveslist;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,7 +13,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TimePicker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,8 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import fr.objectiveslist.helpers.DatePickerFragment;
-import fr.objectiveslist.helpers.SQLiteHelper;
-import fr.objectiveslist.helpers.TimePickerFragment;
+import fr.objectiveslist.helpers.Dates;
 import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskDAO;
 
@@ -147,7 +143,7 @@ public class Trie extends FragmentActivity{
             @Override
             public void onDateSet(DatePicker view, int y, int m, int d) {
                 calendar.set(y, m, d);
-                dateTrie.setText(SQLiteHelper.dateFormat.format(calendar.getTime()));
+                dateTrie.setText(Dates.dateFormat.format(calendar.getTime()));
             }
         };
         date.show(getSupportFragmentManager(), "datePicker");
