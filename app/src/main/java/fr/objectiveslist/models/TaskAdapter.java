@@ -67,27 +67,32 @@ public class TaskAdapter extends BaseAdapter {
         TextView taskTitleTextView = (TextView) layoutItem.findViewById(R.id.task_title);
         TextView taskDesctiptionTextView = (TextView) layoutItem.findViewById(R.id.task_description);
         TextView tastLastTime = (TextView) layoutItem.findViewById(R.id.time_last);
+        TextView state = (TextView) layoutItem.findViewById(R.id.state);
+
         Task task = this.taskList.get(position);
         Log.d(TAG, task.toString());
         taskTitleTextView.setText(task.getTitle());
         taskDesctiptionTextView.setText(task.getDescription().trim());
+
+        state.setText(task.getState());
+
 
         if (new DateTime(task.getDateLimit().getTime()).isAfter(new Instant())) {
             long interval = new DateTime(task.getDateLimit().getTime()).minus(new DateTime().getMillis()).getMillis();
             Duration lastDuree = new Duration(interval);
 
             if (interval > (86400000 * 2)) {
-                tastLastTime.setText(Dates.dateFormat.format(task.getDateLimit()));
+                tastLastTime.setText("The " + Dates.dateFormat.format(task.getDateLimit()));
             } else {
                 String formatted = formatter.print(lastDuree.toPeriod());
-                tastLastTime.setText(formatted);
+                tastLastTime.setText("In " + formatted);
             }
         } else {
             long interval = new DateTime().getMillis() - task.getDateLimit().getTime();
             Duration lastDuree = new Duration(interval);
             tastLastTime.setTextColor(context.getResources().getColor(R.color.label_red));
             if (interval > (86400000 * 2)) {
-                tastLastTime.setText("Late " + Dates.prettyDateFormat.format(task.getDateLimit()));
+                tastLastTime.setText("to be made of " + Dates.prettyDateFormat.format(task.getDateLimit()));
             } else {
                 String formatted = formatter.print(lastDuree.toPeriod());
 

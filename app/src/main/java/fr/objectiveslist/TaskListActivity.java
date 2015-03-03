@@ -44,7 +44,8 @@ public class TaskListActivity extends Activity {
         tasksDao = new TaskDAO(this);
         tasksDao.open();
 
-        tasks = (ArrayList<Task>) tasksDao.getAllTasks();
+        //tasks = (ArrayList<Task>) tasksDao.getAllTasks();
+        tasks = (ArrayList<Task>) tasksDao.getNonFinishedTasks();
         trie = (Button) findViewById(R.id.trie);
         Log.d(TAG, tasks.toString());
 
@@ -129,7 +130,7 @@ public class TaskListActivity extends Activity {
             builder.setPositiveButton("Ok", null);
             builder.create().show();
             */
-            
+
             Toast.makeText(this, "Tasks are passed !!!", Toast.LENGTH_SHORT).show();
         }
 

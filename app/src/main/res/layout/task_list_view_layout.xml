@@ -22,4 +22,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/time_last"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/state"/>
+
 </LinearLayout>

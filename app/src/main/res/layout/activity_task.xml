@@ -27,9 +27,19 @@
                 android:text="@string/hello_world" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description"/>
+
+            <TextView
                 style="@style/TextArea"
                 android:id="@+id/task_description"
                 android:text="@string/hello_world" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/date_limit"/>
 
             <TextView
                 style="@style/BaseItem"
@@ -37,6 +47,11 @@
                 android:paddingTop="5dp"
                 android:id="@+id/task_datetime_limit"
                 android:text="@string/hello_world" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/etat_task"/>
 
             <TextView
                 style="@style/LabelBlue"

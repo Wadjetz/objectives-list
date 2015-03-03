@@ -10,9 +10,9 @@ import fr.objectiveslist.helpers.SQLiteHelper;
 
 public class Task implements Parcelable {
 
-    public static final String DONE = "done";
-    public static final String CREATED = "created";
-    public static final String UNDONE = "undone";
+    public static final String DONE = "Finish";
+    public static final String CREATED = "In progress";
+    public static final String UNDONE = "Cancel";
 
     private int id = 0;
     private String title = "";

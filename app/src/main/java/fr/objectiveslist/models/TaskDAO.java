@@ -103,6 +103,10 @@ public class TaskDAO {
         return db.delete(TABLE_NAME, ID + " = " + task.getId(), null);
     }
 
+    public int deleteAllDoneTasks() {
+        return db.delete(TABLE_NAME, STATE + " = " + Task.DONE, null);
+    }
+
     private Task cursorToTask(Cursor cursor) {
         Task task = new Task();
         task.setId(cursor.getInt(0));
@@ -227,7 +231,33 @@ public class TaskDAO {
         return tasks;
     }
 
+    public List<Task> getNonFinishedTasks() {
+        List<Task> tasks = new ArrayList<>();
+        Cursor cursor = db.query(TABLE_NAME, allColumns, STATE + " != ?", new String[] {Task.DONE}, null, null, null);
+        cursor.moveToFirst();
+        while (! cursor.isAfterLast()) {
+            Task task = cursorToTask(cursor);
+            tasks.add(task);
+            cursor.moveToNext();
+        }
 
+        cursor.close();
+        return tasks;
+    }
+
+    public List<Task> getFinishedTasks() {
+        List<Task> tasks = new ArrayList<>();
+        Cursor cursor = db.query(TABLE_NAME, allColumns, STATE + " = ?", new String[] {Task.DONE}, null, null, null);
+        cursor.moveToFirst();
+        while (! cursor.isAfterLast()) {
+            Task task = cursorToTask(cursor);
+            tasks.add(task);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return tasks;
+    }
 
 }
 

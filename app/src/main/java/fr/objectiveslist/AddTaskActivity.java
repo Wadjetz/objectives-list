@@ -7,11 +7,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -36,7 +34,6 @@ public class AddTaskActivity extends FragmentActivity {
     private EditText description = null;
     private Button dateLimit = null;
     private Button timeLimit = null;
-    private Spinner spinner = null;
 
 
     @Override
@@ -48,14 +45,9 @@ public class AddTaskActivity extends FragmentActivity {
         description = (EditText) findViewById(R.id.task_description);
         dateLimit = (Button) findViewById(R.id.task_date_limit);
         timeLimit = (Button) findViewById(R.id.task_time_limit);
-        spinner = (Spinner) findViewById(R.id.etat);
 
         dateLimit.setText(Dates.dateFormat.format(calendar.getTime()));
         timeLimit.setText(Dates.timeFormat.format(calendar.getTime()));
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.etat_value, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        spinner.setAdapter(adapter);
 
         tasksDao = new TaskDAO(this);
         tasksDao.open();

@@ -91,11 +91,12 @@ public class EditTaskActivity extends FragmentActivity {
             task.setTitle(title.getText().toString());
             task.setDescription(description.getText().toString());
             task.setDateLimit(calendar.getTime());
+            task.setState(spinner.getSelectedItem().toString());
 
             Log.d(TAG, task.toString());
             int res = tasksDao.update(task);
             if (res > 0) {
-                Toast.makeText(this, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Task Saved " + task.getTitle(), Toast.LENGTH_LONG).show();
                 startActivity(new Intent(this, TaskListActivity.class));
                 finish();
             } else {

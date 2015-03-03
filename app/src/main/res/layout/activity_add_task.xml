@@ -65,15 +65,6 @@
 
         </LinearLayout>
 
-        <TextView
-            style="@style/BaseItem"
-            android:text="@string/etat_task"
-            android:id="@+id/textView2" />
-
-        <Spinner
-            style="@style/BaseItem"
-            android:id="@+id/etat" />
-
         <Button
             style="@style/BaseItem"
             android:id="@+id/save_task"
