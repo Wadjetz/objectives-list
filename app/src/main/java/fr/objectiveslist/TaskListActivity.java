@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +23,7 @@ import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskAdapter;
 import fr.objectiveslist.models.TaskDAO;
 
-public class TaskListActivity extends Activity {
+public class TaskListActivity extends ActionBarActivity {
 
     private static final String TAG = "TaskListActivity";
     public static final String TASK_SELECTED = "TASK_SELECTED";
