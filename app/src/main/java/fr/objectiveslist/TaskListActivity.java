@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -122,10 +123,14 @@ public class TaskListActivity extends Activity {
         }
 
         if(cursor.getCount()>0) {
+            /*
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Tasks are passed !!!");
             builder.setPositiveButton("Ok", null);
             builder.create().show();
+            */
+            
+            Toast.makeText(this, "Tasks are passed !!!", Toast.LENGTH_SHORT).show();
         }
 
         cursor.close();

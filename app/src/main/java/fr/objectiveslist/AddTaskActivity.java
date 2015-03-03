@@ -50,6 +50,8 @@ public class AddTaskActivity extends FragmentActivity {
         timeLimit = (Button) findViewById(R.id.task_time_limit);
         spinner = (Spinner) findViewById(R.id.etat);
 
+        dateLimit.setText(Dates.dateFormat.format(calendar.getTime()));
+        timeLimit.setText(Dates.timeFormat.format(calendar.getTime()));
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.etat_value, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
