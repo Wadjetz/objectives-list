@@ -128,7 +128,7 @@ public class TaskActivity extends Activity {
         }
 
         if (id == R.id.action_edit) {
-            Toast.makeText(this, "Task Edit = " + task.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Task Edit = " + task.getTitle(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, EditTaskActivity.class);
             intent.putExtra(TASK_EDITED, task);
             startActivity(intent);
