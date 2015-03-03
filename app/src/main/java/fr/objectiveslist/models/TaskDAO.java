@@ -233,7 +233,7 @@ public class TaskDAO {
 
     public List<Task> getNonFinishedTasks() {
         List<Task> tasks = new ArrayList<>();
-        Cursor cursor = db.query(TABLE_NAME, allColumns, STATE + " != ?", new String[] {Task.DONE}, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME, allColumns, STATE + " = ?", new String[] {Task.CREATED}, null, null, null);
         cursor.moveToFirst();
         while (! cursor.isAfterLast()) {
             Task task = cursorToTask(cursor);
