@@ -1,79 +1,76 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/date"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context="fr.objectiveslist.Trie"
-    android:id="@+id/date">
+    tools:context="fr.objectiveslist.Trie">
 
-    <Spinner
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/BaseItem"
+                android:text="@string/etat_task"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <Spinner
+                android:id="@+id/etat_trie"
+                style="@style/BaseItem" />
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/BaseItem"
+                android:text="@string/set_date" />
+
+            <Button
+                android:id="@+id/dateTrie"
+                style="@style/BaseItem"
+                android:onClick="showDatePickerDialog"
+                android:text="@string/set_date" />
+
+            <TextView
+                android:id="@+id/textView5"
+                style="@style/BaseItem"
+                android:text="@string/title" />
+
+            <EditText
+                android:id="@+id/nom"
+                style="@style/BaseItem" />
+
+            </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etat_trie"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/set_date"
-        android:id="@+id/dateTrie"
-        android:onClick="showDatePickerDialog"
-        android:layout_below="@+id/textView4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <Button
+            android:id="@+id/button2"
+            style="@style/BaseItem"
+            android:layout_weight="1"
+            android:onClick="trieTask"
+            android:text="@string/button_trie" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_trie"
-        android:id="@+id/button2"
-        android:onClick="trieTask"
-        android:layout_marginBottom="104dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/etat_task"
-        android:id="@+id/textView3"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/set_date"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/etat_trie"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/title"
-        android:id="@+id/textView5"
-        android:layout_below="@+id/dateTrie"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nom"
-        android:layout_below="@+id/textView5"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/button2"
-        android:layout_alignRight="@+id/dateTrie"
-        android:layout_alignEnd="@+id/dateTrie" />
-
-</RelativeLayout>
+        <Button
+            android:id="@+id/cancel"
+            style="@style/BaseItem"
+            android:layout_weight="1"
+            android:onClick="cancelAction"
+            android:text="@string/cancel" />
+    </LinearLayout>
+</LinearLayout>

@@ -76,6 +76,11 @@ public class Trie extends FragmentActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    public void cancelAction(View v) {
+        startActivity(new Intent(this, TaskListActivity.class));
+        finish();
+    }
+
     public  void trieTask(View v){
         String etatString = spinner.getSelectedItem().toString();
 
