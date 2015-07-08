@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import fr.objectiveslist.fragments.AddTacheFragment;
 import fr.objectiveslist.fragments.ListFragment;
 import fr.objectiveslist.fragments.SortFragment;
 import fr.objectiveslist.models.Task;
@@ -43,7 +44,7 @@ public class TaskListActivity extends ActionBarActivity {
 
     private SortFragment sortFragment = null;
     private ListFragment listFragment = null;
-
+    private AddTacheFragment addTacheFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,13 +78,16 @@ public class TaskListActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.)
-
+        getMenuInflater().inflate(R.menu.menu_task_list, menu);
 
         return true;
     }
 
     public void newTaskAction(View v) {
-        startActivity(new Intent(this, AddTaskActivity.class));
+        addTacheFragment = new AddTacheFragment();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.main_activity, addTacheFragment, "sort_fragment");
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -92,7 +96,10 @@ public class TaskListActivity extends ActionBarActivity {
             case R.id.action_settings:
                 return true;
             case R.id.action_new:
-                startActivity(new Intent(this, AddTaskActivity.class));
+                addTacheFragment = new AddTacheFragment();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.main_activity, addTacheFragment, "sort_fragment");
+                fragmentTransaction.commit();
                 return true;
             default:
                 return true;

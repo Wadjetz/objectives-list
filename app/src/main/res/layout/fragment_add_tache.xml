@@ -1,0 +1,79 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="fr.objectiveslist.fragments.AddTacheFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/Title1"
+            android:text="@string/create_new_task" />
+
+
+        <TextView
+            style="@style/BaseItem"
+            android:text="@string/title" />
+
+
+        <EditText
+            style="@style/BaseItem"
+            android:id="@+id/task_title"/>
+
+        <TextView
+            style="@style/BaseItem"
+            android:text="@string/description" />
+
+        <EditText
+            style="@style/BaseItem"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/task_description" />
+
+        <TextView
+            style="@style/BaseItem"
+            android:text="@string/date_limit" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:id="@+id/task_date_limit"
+                android:text="@string/set_date"
+                android:onClick="showDatePickerDialog"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:id="@+id/task_time_limit"
+                android:text="@string/set_time"
+                android:onClick="showTimePickerDialog"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <Button
+            style="@style/BaseItem"
+            android:id="@+id/save_task"
+            android:text="@string/save"
+            android:onClick="saveTask" />
+
+        <Button
+            style="@style/BaseItem"
+            android:id="@+id/cancel_task"
+            android:onClick="cancelAction"
+            android:text="@string/cancel"/>
+
+    </LinearLayout>
+</ScrollView>

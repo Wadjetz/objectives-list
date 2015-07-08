@@ -140,8 +140,12 @@ public class SortFragment extends Fragment {
     }
 
     public void cancelAction(View v) {
-        startActivity(new Intent(context, TaskListActivity.class));
         dao.close();
+        ListFragment listFragment = new ListFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.main_activity, listFragment, "fragmentlist");
+        fragmentTransaction.commit();
 
         //finish();
     }

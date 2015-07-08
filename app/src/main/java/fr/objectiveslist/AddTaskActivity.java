@@ -104,7 +104,7 @@ public class AddTaskActivity extends ActionBarActivity {
                 timeLimit.setText(Dates.timeFormat.format(calendar.getTime()));
             }
         };
-        time.show(getSupportFragmentManager(), "timePicker");
+        time.show(getFragmentManager(), "timePicker");
     }
 
 
