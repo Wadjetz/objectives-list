@@ -37,7 +37,7 @@ public class TaskAdapter extends BaseAdapter {
     public TaskAdapter(Context context, List<Task> taskList) {
         this.taskList = taskList;
         this.context = context;
-        this.inflater = LayoutInflater.from(this.context);
+            this.inflater = LayoutInflater.from(this.context);
     }
 
     @Override
