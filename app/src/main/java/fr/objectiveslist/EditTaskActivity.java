@@ -120,7 +120,7 @@ public class EditTaskActivity extends ActionBarActivity {
                 dateLimit.setText(Dates.prettyDateFormat.format(calendar.getTime()));
             }
         };
-        date.show(getSupportFragmentManager(), "datePicker");
+        date.show(getFragmentManager().beginTransaction(), "datePicker");
     }
 
     public void showTimePickerDialog(View v) {

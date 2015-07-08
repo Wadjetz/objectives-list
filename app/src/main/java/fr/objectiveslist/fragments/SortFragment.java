@@ -66,6 +66,14 @@ public class SortFragment extends Fragment {
         text = (EditText) view.findViewById(R.id.nom);
 
         dateTrie = (Button) view.findViewById(R.id.dateTrie);
+
+        dateTrie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog(v);
+            }
+        });
+
         sort = (Button) view.findViewById(R.id.sort);
 
         sort.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +141,8 @@ public class SortFragment extends Fragment {
 
     public void cancelAction(View v) {
         startActivity(new Intent(context, TaskListActivity.class));
+        dao.close();
+
         //finish();
     }
 
@@ -188,14 +198,14 @@ public class SortFragment extends Fragment {
                 listTrie = dao.getTrieTask(etatString);
             }
         }
+        dao.close();
         ListFragment listFragment = new ListFragment();
         listFragment.setList(listTrie);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_activity, listFragment, "fragmentlist");
         fragmentTransaction.commit();
-        //setResult(RESULT_OK, data);
-        //finish();
+
     }
 
     public void showDatePickerDialog(View v) {
@@ -206,7 +216,7 @@ public class SortFragment extends Fragment {
                 dateTrie.setText(Dates.dateFormat.format(calendar.getTime()));
             }
         };
-        //date.show(getFragmentManager(), "datePicker");
+        date.show(getFragmentManager().beginTransaction(), "date");
     }
 
 

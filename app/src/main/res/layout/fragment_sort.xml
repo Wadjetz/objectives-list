@@ -33,13 +33,10 @@
                 android:id="@+id/set_date"
                 style="@style/BaseItem"
                 android:text="@string/set_date" />
-
             <Button
                 android:id="@+id/dateTrie"
                 style="@style/BaseItem"
-                android:onClick="showDatePickerDialog"
                 android:text="@string/set_date" />
-
             <TextView
                 android:id="@+id/title"
                 style="@style/BaseItem"
@@ -62,14 +59,12 @@
             android:id="@+id/sort"
             style="@style/BaseItem"
             android:layout_weight="1"
-
             android:text="@string/button_trie" />
 
         <Button
             android:id="@+id/cancel"
             style="@style/BaseItem"
             android:layout_weight="1"
-
             android:text="@string/cancel" />
     </LinearLayout>
 </LinearLayout>

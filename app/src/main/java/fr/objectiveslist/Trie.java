@@ -152,7 +152,7 @@ public class Trie extends ActionBarActivity  {
                 dateTrie.setText(Dates.dateFormat.format(calendar.getTime()));
             }
         };
-        date.show(getSupportFragmentManager(), "datePicker");
+        date.show(getFragmentManager().beginTransaction(), "datePicker");
     }
 
 }

@@ -92,7 +92,7 @@ public class AddTaskActivity extends ActionBarActivity {
                 dateLimit.setText(Dates.dateFormat.format(calendar.getTime()));
             }
         };
-        date.show(getSupportFragmentManager(), "datePicker");
+        date.show(getFragmentManager().beginTransaction(), "datePicker");
     }
 
     public void showTimePickerDialog(View v) {
