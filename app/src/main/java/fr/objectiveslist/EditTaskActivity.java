@@ -26,7 +26,7 @@ import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskDAO;
 
 
-public class EditTaskActivity extends FragmentActivity {
+public class EditTaskActivity extends ActionBarActivity {
 
     private static final String TAG = "EditTaskActivity";
     private Calendar calendar = Calendar.getInstance();
@@ -62,7 +62,6 @@ public class EditTaskActivity extends FragmentActivity {
 
         Intent intent = getIntent();
         task = intent.getExtras().getParcelable(TaskActivity.TASK_EDITED);
-        Log.d(TAG, task.toString());
 
         calendar.setTimeInMillis(task.getDateLimit().getTime());
 

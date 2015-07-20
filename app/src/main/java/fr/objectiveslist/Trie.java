@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +26,7 @@ import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskDAO;
 
 
-public class Trie extends FragmentActivity{
+public class Trie extends ActionBarActivity  {
 
     private Button dateTrie = null;
 

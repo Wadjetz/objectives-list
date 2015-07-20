@@ -18,7 +18,7 @@ import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskDAO;
 
 
-public class TaskActivity extends Activity {
+public class TaskActivity extends ActionBarActivity {
 
     private static final String TAG = "TaskActivity";
     public static final String TASK_EDITED = "TASK_EDITED";
