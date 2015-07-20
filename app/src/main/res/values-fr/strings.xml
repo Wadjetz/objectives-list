@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Objectives List</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Paramètre</string>
+    <string name="title_activity_task">TaskActivity</string>
+    <string name="title_activity_task_list">TaskListActivity</string>
+    <string name="tasks">Tache</string>
+    <string name="title_activity_add_task">AddTaskActivity</string>
+    <string name="title">Titre</string>
+    <string name="description">Déscription</string>
+    <string name="date_limit">Date limite</string>
+    <string name="save">Sauvegarder</string>
+    <string name="add">Ajouter</string>
+    <string name="set_date">Modifier la Date</string>
+    <string name="set_time">Modifier l\'heure</string>
+    <string name="new_task">Nouvelle tache</string>
+    <string name="edit_task">Modifier une tache</string>
+    <string name="title_activity_edit_task">EditTaskActivity</string>
+    <string name="done">Valider</string>
+    <string name="etat_task">Etat</string>
+    <string name="button_trie">Trier</string>
+    <string name="cancel">Annuler</string>
+    <string name="delete_task">Suprimer</string>
+    <string name="back">Retour</string>
+    <string name="create_new_task">Créer une nouvelle tache</string>
+
+    <string-array name="etat_value">
+        <item>En cours</item>
+        <item>Annuler</item>
+        <item>Finie</item>
+    </string-array>
+    <string-array name="etat_trie">
+        <item>Tout</item>
+        <item>En cours</item>
+        <item>Annuler</item>
+        <item>Finie</item>
+    </string-array>
+    <string-array name="categorie">
+        <item>aucune</item>
+        <item>travaille</item>
+        <item>vacance</item>
+        <item>loisir</item>
+    </string-array>
+    <string name="title_activity_trie">Sort</string>
+    <string name="tasks_done">Archives</string>
+    <string name="title_activity_dones_tasks">DonesTasksActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

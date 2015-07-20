@@ -1,6 +1,10 @@
 package fr.objectiveslist;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
 import android.app.Activity;
@@ -8,17 +12,23 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import fr.objectiveslist.fragments.AddTacheFragment;
+import fr.objectiveslist.fragments.ListFragment;
+import fr.objectiveslist.fragments.SortFragment;
 import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskAdapter;
 import fr.objectiveslist.models.TaskDAO;
@@ -28,73 +38,57 @@ public class TaskListActivity extends ActionBarActivity {
     private static final String TAG = "TaskListActivity";
     public static final String TASK_SELECTED = "TASK_SELECTED";
 
-    private ListView taskListView = null;
 
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private FragmentManager fragmentManager = null;
+    private FragmentTransaction fragmentTransaction;
 
-    private TaskDAO tasksDao = null;
-
-
-    private Button trie = null;
+    private SortFragment sortFragment = null;
+    private ListFragment listFragment = null;
+    private AddTacheFragment addTacheFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
 
-        tasksDao = new TaskDAO(this);
-        tasksDao.open();
 
-        //tasks = (ArrayList<Task>) tasksDao.getAllTasks();
-        tasks = (ArrayList<Task>) tasksDao.getNonFinishedTasks();
-        trie = (Button) findViewById(R.id.trie);
-        Log.d(TAG, tasks.toString());
+        fragmentManager = getFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
 
-        taskListView = (ListView) findViewById(R.id.task_listView);
-        taskListView.setAdapter(new TaskAdapter(this, tasks));
-
-
-
-        taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Task task = (Task) parent.getItemAtPosition(position);
-                Log.d(TAG, task.toString());
-                Intent intent = new Intent(TaskListActivity.this, TaskActivity.class);
-                intent.putExtra(TASK_SELECTED, task);
-                Log.d(TAG, task.toString());
-                startActivity(intent);
-            }
-        });
-
-        timeAlert();
-
+        listFragment = new ListFragment();
+        fragmentTransaction.add(R.id.main_activity, listFragment,"listfragment");
+        fragmentTransaction.commit();
     }
+
 
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        tasksDao.open();
+
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        tasksDao.close();
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present.)
         getMenuInflater().inflate(R.menu.menu_task_list, menu);
+
         return true;
     }
 
     public void newTaskAction(View v) {
-        startActivity(new Intent(this, AddTaskActivity.class));
+        addTacheFragment = new AddTacheFragment();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.main_activity, addTacheFragment, "sort_fragment");
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -103,54 +97,25 @@ public class TaskListActivity extends ActionBarActivity {
             case R.id.action_settings:
                 return true;
             case R.id.action_new:
-                startActivity(new Intent(this, AddTaskActivity.class));
+                addTacheFragment = new AddTacheFragment();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.main_activity, addTacheFragment, "sort_fragment");
+                fragmentTransaction.commit();
                 return true;
             default:
                 return true;
         }
     }
 
-    public void timeAlert()
-    {
-        Calendar c = Calendar.getInstance();
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm");
-        String formattedDate = df.format(c.getTime());
 
-        Cursor cursor = tasksDao.db.query(tasksDao.TABLE_NAME, tasksDao.allColumns, "date_limit < '"+formattedDate+"' and state = 'In progress'", null, null, null, null);
-        cursor.moveToFirst();
-        while (! cursor.isAfterLast()) {
-            Log.d(TAG, cursor.getString(4));
-            cursor.moveToNext();
-        }
-
-        if(cursor.getCount()>0) {
-            /*
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Tasks are passed !!!");
-            builder.setPositiveButton("Ok", null);
-            builder.create().show();
-            */
-
-            Toast.makeText(this, "Tasks are passed !!!", Toast.LENGTH_SHORT).show();
-        }
-
-        cursor.close();
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(resultCode == RESULT_OK){
-            tasks = data.getParcelableArrayListExtra("ResultTrie");
-
-            taskListView.setAdapter(new TaskAdapter(this, tasks));
-        }
-    }
 
     public  void trieList(View v){
-        Intent trie = new Intent(this, Trie.class);
-        startActivityForResult(trie, 1);
-
+/*        Intent trie = new Intent(this, Trie.class);
+        startActivityForResult(trie, 1);*/
+        this.sortFragment = new SortFragment();
+        fragmentTransaction = fragmentManager.beginTransaction();
+       fragmentTransaction.replace(R.id.main_activity, sortFragment, "sort_fragment");
+       fragmentTransaction.commit();
     }
 }

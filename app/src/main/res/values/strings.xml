@@ -37,9 +37,18 @@
         <item>Cancel</item>
         <item>Finish</item>
     </string-array>
-
+    <string name="categie_label">Categories</string>
+    <string-array name="categorie">
+        <item>none</item>
+        <item>work</item>
+        <item>holiday</item>
+        <item>hobie</item>
+    </string-array>
     <string name="title_activity_trie">Sort</string>
     <string name="tasks_done">Archives</string>
     <string name="title_activity_dones_tasks">DonesTasksActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

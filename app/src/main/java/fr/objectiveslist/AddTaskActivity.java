@@ -69,7 +69,7 @@ public class AddTaskActivity extends ActionBarActivity {
     public void saveTask(View v) {
         if(title.getText().toString().trim().length()>0 && title.getText().toString().trim().length()<=30) {
             Task task = new Task(title.getText().toString(), description.getText().toString(), Task.CREATED,
-                    calendar.getTime());
+                    calendar.getTime(), "");
             Log.d(TAG, task.toString());
             tasksDao.create(task);
             Toast.makeText(this, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
@@ -92,7 +92,7 @@ public class AddTaskActivity extends ActionBarActivity {
                 dateLimit.setText(Dates.dateFormat.format(calendar.getTime()));
             }
         };
-        date.show(getSupportFragmentManager(), "datePicker");
+        date.show(getFragmentManager().beginTransaction(), "datePicker");
     }
 
     public void showTimePickerDialog(View v) {
@@ -104,7 +104,7 @@ public class AddTaskActivity extends ActionBarActivity {
                 timeLimit.setText(Dates.timeFormat.format(calendar.getTime()));
             }
         };
-        time.show(getSupportFragmentManager(), "timePicker");
+        time.show(getFragmentManager(), "timePicker");
     }
 
 

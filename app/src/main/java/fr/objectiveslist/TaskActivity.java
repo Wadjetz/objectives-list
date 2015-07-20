@@ -27,6 +27,7 @@ public class TaskActivity extends ActionBarActivity {
     private TextView taskDescription = null;
     private TextView taskDateLimit = null;
     private TextView taskStatus = null;
+    private TextView taskCategorie = null;
 
     private TaskDAO tasksDAO = null;
 
@@ -51,13 +52,13 @@ public class TaskActivity extends ActionBarActivity {
         taskDescription = (TextView) findViewById(R.id.task_description);
         taskDateLimit = (TextView) findViewById(R.id.task_datetime_limit);
         taskStatus = (TextView) findViewById(R.id.task_status);
-
+        taskCategorie = (TextView) findViewById(R.id.textView6);
 
         taskTitle.setText(task.getTitle());
         taskDescription.setText(task.getDescription());
         taskDateLimit.setText(Dates.prettyDateTimeFormat.format(task.getDateLimit()));
         taskStatus.setText(task.getState());
-
+        taskCategorie.setText(task.getCategorie());
     }
 
     public void doneTask(View v) {

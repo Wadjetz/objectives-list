@@ -18,26 +18,29 @@ public class Task implements Parcelable {
     private String title = "";
     private String description = "";
     private String state = "";
+    private String categorie = "";
     private Date dateLimit = null;
     private Date createdAt = null;
     private Date updatedAt = null;
 
     public Task() {}
 
-    public Task(String title, String description, String state, Date dateLimit) {
+    public Task(String title, String description, String state, Date dateLimit, String categorie) {
         this.id = 0;
         this.title = title;
         this.description = description;
         this.state = state;
         this.dateLimit = dateLimit;
+        this.categorie = categorie;
     }
 
-    public Task(String title, String description, String state, String dateLimit) {
+    public Task(String title, String description, String state, String dateLimit, String categorie) {
         this.id = 0;
         this.title = title;
         this.description = description;
         this.state = state;
         this.dateLimit = SQLiteHelper.getDateTime(dateLimit);
+        this.categorie = categorie;
     }
 
     private Task(Parcel in) {
@@ -45,6 +48,7 @@ public class Task implements Parcelable {
         this.setTitle(in.readString());
         this.setDescription(in.readString());
         this.setState(in.readString());
+        this.setCategorie(in.readString());
         this.setDateLimit(dateFromTimestamp(in.readLong()));
         this.setCreatedAt(dateFromTimestamp(in.readLong()));
         this.setUpdatedAt(dateFromTimestamp(in.readLong()));
@@ -61,6 +65,7 @@ public class Task implements Parcelable {
         dest.writeString(this.getTitle());
         dest.writeString(this.getDescription());
         dest.writeString(this.getState());
+        dest.writeString(this.getCategorie());
         dest.writeLong(this.getDateLimit().getTime());
         dest.writeLong(this.getCreatedAt().getTime());
         dest.writeLong(this.getUpdatedAt().getTime());
@@ -151,5 +156,14 @@ public class Task implements Parcelable {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
     }
 }
