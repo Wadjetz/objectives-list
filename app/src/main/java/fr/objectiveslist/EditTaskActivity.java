@@ -41,6 +41,7 @@ public class EditTaskActivity extends ActionBarActivity {
 
 
     private Spinner spinner = null;
+    private Spinner categories = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +53,16 @@ public class EditTaskActivity extends ActionBarActivity {
         timeLimit = (Button) findViewById(R.id.task_time_limit);
 
         spinner = (Spinner) findViewById(R.id.etat);
-
+        categories = (Spinner) findViewById(R.id.spinner2);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.etat_value, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
 
+
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.categorie, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        categories.setAdapter(adapter2);
 
 
         Intent intent = getIntent();
@@ -79,6 +84,8 @@ public class EditTaskActivity extends ActionBarActivity {
             spinner.setSelection(position);
             position = 0;
         }
+        int position2 = adapter2.getPosition(task.getCategorie());
+        categories.setSelection(position2);
 
 
         tasksDao = new TaskDAO(this);
@@ -91,7 +98,7 @@ public class EditTaskActivity extends ActionBarActivity {
             task.setDescription(description.getText().toString());
             task.setDateLimit(calendar.getTime());
             task.setState(spinner.getSelectedItem().toString());
-
+            task.setCategorie(categories.getSelectedItem().toString());
             Log.d(TAG, task.toString());
             int res = tasksDao.update(task);
             if (res > 0) {

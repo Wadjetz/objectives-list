@@ -37,6 +37,7 @@ public class SortFragment extends Fragment {
     private Button dateTrie = null;
 
     private Spinner spinner = null;
+    private Spinner categories = null;
     private EditText text = null;
     private Calendar calendar = Calendar.getInstance();
     TaskDAO dao = null;
@@ -98,6 +99,13 @@ public class SortFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
 
+        categories = (Spinner) view.findViewById(R.id.spinner3);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(context, R.array.categorie, android.R.layout.simple_spinner_item);
+
+        adapter2.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        categories.setAdapter(adapter2);
+
+
         dao = new TaskDAO(context);
         dao.open();
 
@@ -154,6 +162,7 @@ public class SortFragment extends Fragment {
         String etatString = spinner.getSelectedItem().toString();
 
         String nom = text.getText().toString();
+        String categireTask = categories.getSelectedItem().toString();
         Date date = calendar.getTime();
         ArrayAdapter<CharSequence> spinner = ArrayAdapter.createFromResource(context, R.array.etat_trie, android.R.layout.simple_spinner_item);
         Log.i("infor", spinner.getItem(0).toString());
@@ -170,7 +179,7 @@ public class SortFragment extends Fragment {
             }
             //tout les champs
             else {
-                listTrie = dao.getTrieTask(etatString, date, nom);
+                listTrie = dao.getTrieTask(etatString, date, nom, categireTask);
             }
         }
         //si il n'y a pas de date

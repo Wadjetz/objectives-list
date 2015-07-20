@@ -13,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -45,7 +47,7 @@ public class AddTacheFragment extends Fragment {
     private Button save = null;
     private Button cancel = null;
     private Context context = null;
-
+    private Spinner categories = null;
 
     public AddTacheFragment() {
         // Required empty public constructor
@@ -86,7 +88,12 @@ public class AddTacheFragment extends Fragment {
 
         dateLimit.setText(Dates.dateFormat.format(calendar.getTime()));
         timeLimit.setText(Dates.timeFormat.format(calendar.getTime()));
+        categories = (Spinner) view.findViewById(R.id.spinner);
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.categorie, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        categories.setAdapter(adapter);
 
         save = (Button) view.findViewById(R.id.save_task);
 
@@ -144,7 +151,7 @@ public class AddTacheFragment extends Fragment {
     public void saveTask(View v) {
         if(title.getText().toString().trim().length()>0 && title.getText().toString().trim().length()<=30) {
             Task task = new Task(title.getText().toString(), description.getText().toString(), Task.CREATED,
-                    calendar.getTime());
+                    calendar.getTime(), categories.getSelectedItem().toString());
             Log.d(TAG, task.toString());
             tasksDao.create(task);
             Toast.makeText(context, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();

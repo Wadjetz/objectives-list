@@ -14,13 +14,13 @@
     <string name="save">Sauvegarder</string>
     <string name="add">Ajouter</string>
     <string name="set_date">Modifier la Date</string>
-    <string name="set_time">Modifier l'heure</string>
+    <string name="set_time">Modifier l\'heure</string>
     <string name="new_task">Nouvelle tache</string>
     <string name="edit_task">Modifier une tache</string>
     <string name="title_activity_edit_task">EditTaskActivity</string>
     <string name="done">Valider</string>
     <string name="etat_task">Etat</string>
-    <string name="button_trie">Editer</string>
+    <string name="button_trie">Trier</string>
     <string name="cancel">Annuler</string>
     <string name="delete_task">Suprimer</string>
     <string name="back">Retour</string>
@@ -37,7 +37,12 @@
         <item>Annuler</item>
         <item>Finie</item>
     </string-array>
-
+    <string-array name="categorie">
+        <item>aucune</item>
+        <item>travaille</item>
+        <item>vacance</item>
+        <item>loisir</item>
+    </string-array>
     <string name="title_activity_trie">Sort</string>
     <string name="tasks_done">Archives</string>
     <string name="title_activity_dones_tasks">DonesTasksActivity</string>

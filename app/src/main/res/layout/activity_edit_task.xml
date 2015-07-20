@@ -72,6 +72,17 @@
             style="@style/BaseItem"
             android:id="@+id/etat" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/categie_label"
+            android:id="@+id/textView3" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner2" />
+
         <Button
             style="@style/BaseItem"
             android:id="@+id/save_task"

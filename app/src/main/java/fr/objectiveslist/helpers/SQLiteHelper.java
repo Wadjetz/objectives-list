@@ -18,7 +18,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String TAG = "SQLiteHelper";
 
     private static final String DATABASE_NAME = "objectives_list.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String DATABASE_CREATE = "CREATE TABLE " +
             TaskDAO.TABLE_NAME + " ( " +
@@ -28,7 +28,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 TaskDAO.STATE + " TEXT NOT NULL, " +
                 TaskDAO.DATE_LIMIT + " DATETIME NOT NULL, " +
                 TaskDAO.CREATED_AT + " DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, " +
-                TaskDAO.UPDATED_AT + " DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP" +
+                TaskDAO.UPDATED_AT + " DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP," +
+                TaskDAO.CATEGORIE + " TEXT NOT NULL "+
             " );";
 
     public SQLiteHelper(Context context) {
