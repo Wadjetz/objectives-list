@@ -33,6 +33,8 @@ import fr.objectiveslist.models.TaskDAO;
 
 public class ListFragment extends Fragment {
 
+    public final static String STATE_SORT_LIST = "STATE_SORT_LIST";
+
     private ListView taskListView = null;
 
     private ArrayList<Task> tasks = new ArrayList<>();
@@ -56,7 +58,11 @@ public class ListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        // Check whether we're recreating a previously destroyed instance
+        if (savedInstanceState != null) {
+            // Restore value of members from saved state
+            list = savedInstanceState.getParcelableArrayList(STATE_SORT_LIST);
+        }
     }
 
     @Override
@@ -165,4 +171,13 @@ public class ListFragment extends Fragment {
         this.list = list;
 
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        savedInstanceState.putParcelableArrayList(STATE_SORT_LIST, (ArrayList<? extends Parcelable>) this.list);
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
 }
