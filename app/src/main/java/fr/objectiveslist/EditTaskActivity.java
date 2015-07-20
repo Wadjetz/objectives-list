@@ -47,6 +47,8 @@ public class EditTaskActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         title = (EditText) findViewById(R.id.task_title);
         description = (EditText) findViewById(R.id.task_description);
         dateLimit = (Button) findViewById(R.id.task_date_limit);

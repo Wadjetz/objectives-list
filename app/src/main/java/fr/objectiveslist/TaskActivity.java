@@ -1,6 +1,5 @@
 package fr.objectiveslist;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import fr.objectiveslist.helpers.Dates;
-import fr.objectiveslist.helpers.SQLiteHelper;
 import fr.objectiveslist.models.Task;
 import fr.objectiveslist.models.TaskDAO;
 
@@ -37,6 +35,8 @@ public class TaskActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Intent intent = getIntent();
         task = intent.getExtras().getParcelable(TaskListActivity.TASK_SELECTED);

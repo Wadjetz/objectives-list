@@ -1,32 +1,16 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="fr.objectiveslist.fragments.ListFragment"
-    android:orientation="vertical" android:id="@+id/fragment_list"
-    >
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fr.objectiveslist.fragments.ListFragment"
+    android:orientation="vertical"
+    android:id="@+id/fragment_list">
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
         android:id="@+id/task_listView" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            style="@style/BaseItem"
-            android:layout_weight="1"
-            android:text="@string/new_task"
-            android:onClick="newTaskAction" />
-
-        <Button
-            style="@style/BaseItem"
-            android:text="@string/button_trie"
-            android:id="@+id/trie"
-            android:layout_weight="1"
-            android:onClick="trieList"/>
-    </LinearLayout>
 
 </LinearLayout>

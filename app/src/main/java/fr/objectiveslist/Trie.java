@@ -39,6 +39,8 @@ public class Trie extends ActionBarActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trie);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         spinner = (Spinner) findViewById(R.id.etat_trie);
         text = (EditText) findViewById(R.id.nom);
 

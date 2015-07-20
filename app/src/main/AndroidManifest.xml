@@ -18,12 +18,6 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:name=".MyReceiver"
-            android:enabled="true"
-            android:exported="true" >
-        </receiver>
-
         <activity
             android:name=".TaskActivity"
             android:label="@string/title_activity_task" >
@@ -48,6 +42,9 @@
         <activity
             android:name=".Trie"
             android:label="@string/title_activity_trie" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".TaskListActivity" />
         </activity>
     </application>
 

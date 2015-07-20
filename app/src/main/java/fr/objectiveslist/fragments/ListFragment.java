@@ -70,7 +70,6 @@ public class ListFragment extends Fragment {
         context = view.getContext();
         //tasks = (ArrayList<Task>) tasksDao.getAllTasks();
         tasks = (ArrayList<Task>) tasksDao.getNonFinishedTasks();
-        trie = (Button) view.findViewById(R.id.trie);
         Log.d(TAG, tasks.toString());
 
         taskListView = (ListView) view.findViewById(R.id.task_listView);
@@ -103,7 +102,6 @@ public class ListFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
     }
 
     @Override
