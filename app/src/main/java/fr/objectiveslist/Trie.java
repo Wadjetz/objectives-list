@@ -94,15 +94,15 @@ public class Trie extends ActionBarActivity  {
         if(!nom.equals("") && !dateTrie.getText().toString().equals(getString(R.string.set_date))) {
             //si il y a une date + un nom
             if(etatString.equals(spinner.getItem(0).toString()) && !nom.equals("")){
-                listTrie = dao.getTrieTask(date, nom, 1);
+                listTrie = dao.getTrieTask(date, nom, 1, "");
             }
             //si il y a une date + un etat
             else if(!etatString.equals(spinner.getItem(0).toString()) && nom.equals("")){
-                listTrie = dao.getTrieTask(date, etatString, 0);
+                listTrie = dao.getTrieTask(date, etatString, 0, "");
             }
             //tout les champs
             else {
-                listTrie = dao.getTrieTask(etatString, date, nom);
+                listTrie = dao.getTrieTask(etatString, date, nom, "");
             }
         }
         //si il n'y a pas de date
@@ -122,7 +122,7 @@ public class Trie extends ActionBarActivity  {
         }
         //uniquement la date
         else if(!dateTrie.getText().toString().equals(getString(R.string.set_date))){
-            listTrie = (ArrayList<Task>) dao.getTrieTask(date);
+            listTrie = (ArrayList<Task>) dao.getTrieTask(date, "");
         }
         else{
             //tout les taches ne sont pas  rensigner
@@ -131,7 +131,7 @@ public class Trie extends ActionBarActivity  {
             }
             //que l'etat est rechercher
             else {
-                listTrie = dao.getTrieTask(etatString);
+                listTrie = dao.getTrieTask(etatString, "");
             }
         }
         Intent data = new Intent();

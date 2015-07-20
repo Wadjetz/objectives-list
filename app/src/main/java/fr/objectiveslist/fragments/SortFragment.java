@@ -160,7 +160,7 @@ public class SortFragment extends Fragment {
 
     public  void trieTask(View v){
         String etatString = spinner.getSelectedItem().toString();
-
+        Log.i("TrieFrag", "fdksldf");
         String nom = text.getText().toString();
         String categireTask = categories.getSelectedItem().toString();
         Date date = calendar.getTime();
@@ -171,11 +171,11 @@ public class SortFragment extends Fragment {
         if(!nom.equals("") && !dateTrie.getText().toString().equals(getString(R.string.set_date))) {
             //si il y a une date + un nom
             if(etatString.equals(spinner.getItem(0).toString()) && !nom.equals("")){
-                listTrie = dao.getTrieTask(date, nom, 1);
+                listTrie = dao.getTrieTask(date, nom, 1, categireTask);
             }
             //si il y a une date + un etat
             else if(!etatString.equals(spinner.getItem(0).toString()) && nom.equals("")){
-                listTrie = dao.getTrieTask(date, etatString, 0);
+                listTrie = dao.getTrieTask(date, etatString, 0, categireTask);
             }
             //tout les champs
             else {
@@ -194,12 +194,12 @@ public class SortFragment extends Fragment {
                 if(etatString.equals(spinner.getItem(0).toString())){
                     etatString = "";
                 }
-                listTrie = dao.getTrieTask(etatString, nom);
+                listTrie = dao.getTrieTask(etatString, nom, categireTask);
             }
         }
         //uniquement la date
         else if(!dateTrie.getText().toString().equals(getString(R.string.set_date))){
-            listTrie = (ArrayList<Task>) dao.getTrieTask(date);
+            listTrie = (ArrayList<Task>) dao.getTrieTask(date, categireTask);
         }
         else{
             //tout les taches ne sont pas  rensigner
@@ -208,7 +208,7 @@ public class SortFragment extends Fragment {
             }
             //que l'etat est rechercher
             else {
-                listTrie = dao.getTrieTask(etatString);
+                listTrie = dao.getTrieTask(etatString, categireTask);
             }
         }
         dao.close();
