@@ -154,7 +154,7 @@ public class AddTacheFragment extends Fragment {
                     calendar.getTime(), categories.getSelectedItem().toString());
             Log.d(TAG, task.toString());
             tasksDao.create(task);
-            Toast.makeText(context, "Task Saved " + task.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, getResources().getString(R.string.task_created) + " " + task.getTitle(), Toast.LENGTH_LONG).show();
             startActivity(new Intent(context, TaskListActivity.class));
 
         } else {
